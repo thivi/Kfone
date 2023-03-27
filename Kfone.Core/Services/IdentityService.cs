@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 using Kfone.Core.Helpers;
 
-using Microsoft.Identity.Client;
-
 namespace Kfone.Core.Services
 {
     public class IdentityService
@@ -28,8 +26,8 @@ namespace Kfone.Core.Services
         private readonly string[] _graphScopes = new string[] { "user.read" };
 
         private bool _integratedAuthAvailable;
-        private IPublicClientApplication _client;
-        private AuthenticationResult _authenticationResult;
+        private object _client;
+        private object _authenticationResult;
 
         public event EventHandler LoggedIn;
 
@@ -38,37 +36,7 @@ namespace Kfone.Core.Services
         public void InitializeWithAadAndPersonalMsAccounts()
         {
             _integratedAuthAvailable = false;
-            _client = PublicClientApplicationBuilder.Create(_clientId)
-                                                    .WithAuthority(AadAuthorityAudience.AzureAdAndPersonalMicrosoftAccount)
-                                                    .WithRedirectUri(_redirectUri)
-                                                    .Build();
-        }
-
-        public void InitializeWithPersonalMsAccount()
-        {
-            _integratedAuthAvailable = false;
-            _client = PublicClientApplicationBuilder.Create(_clientId)
-                                                    .WithAuthority(AadAuthorityAudience.PersonalMicrosoftAccount)
-                                                    .WithRedirectUri(_redirectUri)
-                                                    .Build();
-        }
-
-        public void InitializeWithAadMultipleOrgs(bool integratedAuth = false)
-        {
-            _integratedAuthAvailable = integratedAuth;
-            _client = PublicClientApplicationBuilder.Create(_clientId)
-                                                    .WithAuthority(AadAuthorityAudience.AzureAdMultipleOrgs)
-                                                    .WithRedirectUri(_redirectUri)
-                                                    .Build();
-        }
-
-        public void InitializeWithAadSingleOrg(string tenant, bool integratedAuth = false)
-        {
-            _integratedAuthAvailable = integratedAuth;
-            _client = PublicClientApplicationBuilder.Create(_clientId)
-                                                    .WithAuthority(AzureCloudInstance.AzurePublic, tenant)
-                                                    .WithRedirectUri(_redirectUri)
-                                                    .Build();
+            _client = null;
         }
 
         public bool IsLoggedIn() => _authenticationResult != null;
@@ -82,10 +50,7 @@ namespace Kfone.Core.Services
 
             try
             {
-                var accounts = await _client.GetAccountsAsync();
-                _authenticationResult = await _client.AcquireTokenInteractive(_graphScopes)
-                                                     .WithAccount(accounts.FirstOrDefault())
-                                                     .ExecuteAsync();
+                _authenticationResult = null;
                 if (!IsAuthorized())
                 {
                     _authenticationResult = null;
@@ -94,15 +59,6 @@ namespace Kfone.Core.Services
 
                 LoggedIn?.Invoke(this, EventArgs.Empty);
                 return LoginResultType.Success;
-            }
-            catch (MsalClientException ex)
-            {
-                if (ex.ErrorCode == "authentication_canceled")
-                {
-                    return LoginResultType.CancelledByUser;
-                }
-
-                return LoginResultType.UnknownError;
             }
             catch (Exception)
             {
@@ -119,24 +75,17 @@ namespace Kfone.Core.Services
 
         public string GetAccountUserName()
         {
-            return _authenticationResult?.Account?.Username;
+            return "Asgardeo User";
         }
 
         public async Task LogoutAsync()
         {
             try
             {
-                var accounts = await _client.GetAccountsAsync();
-                var account = accounts.FirstOrDefault();
-                if (account != null)
-                {
-                    await _client.RemoveAsync(account);
-                }
-
                 _authenticationResult = null;
                 LoggedOut?.Invoke(this, EventArgs.Empty);
             }
-            catch (MsalException)
+            catch (Exception)
             {
                 // TODO: LogoutAsync can fail please handle exceptions as appropriate to your scenario
                 // For more info on MsalExceptions see
@@ -151,20 +100,17 @@ namespace Kfone.Core.Services
             var acquireTokenSuccess = await AcquireTokenSilentAsync(scopes);
             if (acquireTokenSuccess)
             {
-                return _authenticationResult.AccessToken;
+                return "_authenticationResult.AccessToken";
             }
             else
             {
                 try
                 {
                     // Interactive authentication is required
-                    var accounts = await _client.GetAccountsAsync();
-                    _authenticationResult = await _client.AcquireTokenInteractive(scopes)
-                                                         .WithAccount(accounts.FirstOrDefault())
-                                                         .ExecuteAsync();
-                    return _authenticationResult.AccessToken;
+                    _authenticationResult = null;
+                    return "_authenticationResult.AccessToken";
                 }
-                catch (MsalException)
+                catch (Exception)
                 {
                     // AcquireTokenSilent and AcquireTokenInteractive failed, the session will be closed.
                     _authenticationResult = null;
@@ -185,34 +131,10 @@ namespace Kfone.Core.Services
 
             try
             {
-                var accounts = await _client.GetAccountsAsync();
-                _authenticationResult = await _client.AcquireTokenSilent(scopes, accounts.FirstOrDefault())
-                                                     .ExecuteAsync();
+                _authenticationResult = null;
                 return true;
             }
-            catch (MsalUiRequiredException)
-            {
-                if (_integratedAuthAvailable)
-                {
-                    try
-                    {
-                        _authenticationResult = await _client.AcquireTokenByIntegratedWindowsAuth(_graphScopes)
-                                                             .ExecuteAsync();
-                        return true;
-                    }
-                    catch (MsalUiRequiredException)
-                    {
-                        // Interactive authentication is required
-                        return false;
-                    }
-                }
-                else
-                {
-                    // Interactive authentication is required
-                    return false;
-                }
-            }
-            catch (MsalException)
+            catch (Exception)
             {
                 // TODO: Silentauth failed, please handle this exception as appropriate to your scenario
                 // For more info on MsalExceptions see
