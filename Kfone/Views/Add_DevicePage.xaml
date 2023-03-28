@@ -1,0 +1,33 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom="using:Microsoft.UI.Xaml.Controls"
+    x:Class="Kfone.Views.Add_DevicePage"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+    <Grid x:Name="ContentArea" Margin="{ThemeResource LargeTopMargin}">
+        <StackPanel
+            Grid.Column="1"
+            Margin="{StaticResource SmallLeftMargin}"
+            VerticalAlignment="Stretch" >
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="68"/>
+            <TextBox x:Name="Name" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" PlaceholderText="Enter a name" VerticalAlignment="Top" Width="206"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Price" VerticalAlignment="Top" Width="68"/>
+            <TextBox x:Name="Price" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" PlaceholderText="Enter a price" VerticalAlignment="Top" Width="206"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Brand" VerticalAlignment="Top" Width="68"/>
+            <TextBox x:Name="Brand" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" PlaceholderText="Enter a brand" VerticalAlignment="Top" Width="206"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Image" VerticalAlignment="Top" Width="68"/>
+            <TextBox x:Name="ImageURL" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" PlaceholderText="Enter an image URL" VerticalAlignment="Top" Width="206"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Type" VerticalAlignment="Top" Width="68"/>
+            <ComboBox x:Name="TypeComboBox" Width="206" PlaceholderText="Select a type" IsDropDownOpen="True"/>
+            <Button Content="Add Device" Click="Button_Click" Margin="{ThemeResource MediumTopMargin}"/>
+
+            <!--
+                The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
+                Place your content here.
+            -->
+        </StackPanel>
+    </Grid>
+</Page>

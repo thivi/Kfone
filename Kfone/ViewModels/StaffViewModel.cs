@@ -38,6 +38,7 @@ namespace Kfone.ViewModels
                 SampleItems.Add(item);
             }
 
+
             if (viewState == ListDetailsViewState.Both)
             {
                 Selected = SampleItems.First();

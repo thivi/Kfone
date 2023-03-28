@@ -13,15 +13,15 @@ namespace Kfone.ViewModels
 {
     public class DevicesViewModel : ObservableObject
     {
-        private SampleOrder _selected;
+        private Device _selected;
 
-        public SampleOrder Selected
+        public Device Selected
         {
             get { return _selected; }
             set { SetProperty(ref _selected, value); }
         }
 
-        public ObservableCollection<SampleOrder> SampleItems { get; private set; } = new ObservableCollection<SampleOrder>();
+        public ObservableCollection<Device> SampleItems { get; private set; } = new ObservableCollection<Device>();
 
         public DevicesViewModel()
         {
@@ -31,16 +31,18 @@ namespace Kfone.ViewModels
         {
             SampleItems.Clear();
 
-            var data = await SampleDataService.GetListDetailsDataAsync();
-
-            foreach (var item in data)
+            var data = DeviceService.GetDevices();
+            if (data.Count != 0)
             {
-                SampleItems.Add(item);
-            }
+                foreach (var item in data)
+                {
+                    SampleItems.Add(item);
+                }
 
-            if (viewState == ListDetailsViewState.Both)
-            {
-                Selected = SampleItems.First();
+                if (viewState == ListDetailsViewState.Both)
+                {
+                    Selected = SampleItems.First();
+                }
             }
         }
     }

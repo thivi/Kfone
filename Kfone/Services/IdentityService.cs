@@ -8,6 +8,7 @@ using IdentityModel.Client;
 using IdentityModel.OidcClient;
 
 using Kfone.Core.Helpers;
+using Kfone.Core.Models;
 using Windows.Media.Protection.PlayReady;
 
 namespace Kfone.Services
@@ -45,7 +46,7 @@ namespace Kfone.Services
                 Authority = "https://api.asgardeo.io/t/kfoneteam2/oauth2/token",
                 ClientId = "lp79hGwq602Hx7jjhDuTlv08EOMa",
                 ClientSecret = "MfyTzRqPhHROq4MIQ2l67rs_woMa",
-                Scope = "openid profile",
+                Scope = "openid profile groups",
                 RedirectUri = "kfone://callback",
                 Browser = new SystemBrowser(),
                 Policy = new Policy
@@ -78,9 +79,6 @@ namespace Kfone.Services
 
             try
             {
-                var httpClient = new HttpClient();
-                var disco = await httpClient.GetDiscoveryDocumentAsync("https://api.asgardeo.io/t/kfoneteam2/oauth2/token/.well-known/openid-configuration");
-                if (disco.IsError) throw new Exception(disco.Error);
                 _authenticationResult = await _client.LoginAsync(new LoginRequest());
 
                 if (!IsAuthorized())
@@ -107,7 +105,38 @@ namespace Kfone.Services
 
         public string GetAccountUserName()
         {
+
             return _authenticationResult.User.Claims.Where(claim => claim.Type == "given_name").ToList()[0].Value;
+        }
+
+        public Roles GetUserRole()
+        {
+            Roles role;
+            const string adminG = "ApplicationAdmin";
+            const string salesG = "SalesRep";
+            const string marketingG = "MarketingLead";
+            string groupName = _authenticationResult.User.Claims.Where(claim => claim.Type == "groups").ToList()[0].Value;
+
+            switch (groupName)
+            {
+                case adminG:
+                    role = Roles.AdminG;
+
+                    break;
+                case salesG:
+                    role = Roles.SalesRep;
+
+                    break;
+                case marketingG:
+                    role = Roles.Marketing;
+
+                    break;
+                default:
+                    role = Roles.Customer;
+                    break;
+            }
+
+            return role;
         }
 
         public async Task LogoutAsync()

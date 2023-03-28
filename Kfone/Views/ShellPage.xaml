@@ -34,15 +34,12 @@
             Edit String/en-US/Resources.resw: Add a menu item title for each page
             -->
             <winui:NavigationViewItem x:Uid="Shell_Dashboard" Icon="Document" helpers:NavHelper.NavigateTo="views:DashboardPage" />
-            <winui:NavigationViewItem x:Uid="Shell_Sales_trend" Icon="Document" helpers:NavHelper.NavigateTo="views:Sales_trendPage" />
             <winui:NavigationViewItem x:Uid="Shell_Profile" Icon="Document" helpers:NavHelper.NavigateTo="views:ProfilePage" />
-            <winui:NavigationViewItem x:Uid="Shell_Camera" Icon="Document" helpers:NavHelper.NavigateTo="views:CameraPage" />
-            <winui:NavigationViewItem x:Uid="Shell_Devices" Icon="Document" helpers:NavHelper.NavigateTo="views:DevicesPage" />
+            <winui:NavigationViewItem x:Uid="Shell_Devices" Icon="Document" helpers:NavHelper.NavigateTo="views:DeviceView" />
             <winui:NavigationViewItem x:Uid="Shell_Services" Icon="Document" helpers:NavHelper.NavigateTo="views:ServicesPage" />
             <winui:NavigationViewItem x:Uid="Shell_Promotions" Icon="Document" helpers:NavHelper.NavigateTo="views:PromotionsPage" />
             <winui:NavigationViewItem x:Uid="Shell_Customers" Icon="Document" helpers:NavHelper.NavigateTo="views:CustomersPage" />
-            <winui:NavigationViewItem x:Uid="Shell_Staff" Icon="Document" helpers:NavHelper.NavigateTo="views:StaffPage" />
-            <winui:NavigationViewItem x:Uid="Shell_SchemeActivationSample" Icon="Document" helpers:NavHelper.NavigateTo="views:SchemeActivationSamplePage" />
+            <winui:NavigationViewItem x:Uid="Shell_Staff" Icon="Document" helpers:NavHelper.NavigateTo="views:StaffView" />
         </winui:NavigationView.MenuItems>
         <i:Interaction.Behaviors>
             <behaviors:NavigationViewHeaderBehavior

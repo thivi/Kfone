@@ -321,4 +321,12 @@
     <value>Log out</value>
     <comment>Settings LogOut user content</comment>
   </data>
+  <data name="Shell_Add_Staff.Content" xml:space="preserve">
+    <value>Add_Staff</value>
+    <comment>Navigation view item name for Add_Staff</comment>
+  </data>
+  <data name="Shell_Add_Device.Content" xml:space="preserve">
+    <value>Add_Device</value>
+    <comment>Navigation view item name for Add_Device</comment>
+  </data>
 </root>
