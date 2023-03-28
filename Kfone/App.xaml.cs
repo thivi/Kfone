@@ -1,7 +1,6 @@
 ﻿using System;
 
 using Kfone.Core.Helpers;
-using Kfone.Core.Services;
 using Kfone.Services;
 
 using Windows.ApplicationModel.Activation;

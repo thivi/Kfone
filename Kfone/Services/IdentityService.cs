@@ -3,10 +3,11 @@ using System.Configuration;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
+using IdentityModel.OidcClient;
 
 using Kfone.Core.Helpers;
 
-namespace Kfone.Core.Services
+namespace Kfone.Services
 {
     public class IdentityService
     {
@@ -26,9 +27,8 @@ namespace Kfone.Core.Services
         private readonly string[] _graphScopes = new string[] { "user.read" };
 
         private bool _integratedAuthAvailable;
-        private object _client;
-        private object _authenticationResult;
-
+        private OidcClient _client;
+        private LoginResult _authenticationResult;
         public event EventHandler LoggedIn;
 
         public event EventHandler LoggedOut;
@@ -36,7 +36,18 @@ namespace Kfone.Core.Services
         public void InitializeWithAadAndPersonalMsAccounts()
         {
             _integratedAuthAvailable = false;
-            _client = null;
+
+            var options = new OidcClientOptions
+            {
+                Authority = "https://api.asgardeo.io/t/thivi",
+                ClientId = "NMxHm9npKWDsfowttB4RcTgVJDca",
+                ClientSecret = "3LdTVHw0VzC0_CoP36jjuWxXwy4a",
+                Scope = "openid profile",
+                RedirectUri = "kfone://callback",
+                Browser = new SystemBrowser()
+            };
+
+            _client = new OidcClient(options);
         }
 
         public bool IsLoggedIn() => _authenticationResult != null;
@@ -50,7 +61,10 @@ namespace Kfone.Core.Services
 
             try
             {
-                _authenticationResult = null;
+
+
+                _authenticationResult = await _client.LoginAsync(new LoginRequest());
+
                 if (!IsAuthorized())
                 {
                     _authenticationResult = null;
@@ -70,7 +84,7 @@ namespace Kfone.Core.Services
         {
             // TODO: You can also add extra authorization checks here.
             // i.e.: Checks permisions of _authenticationResult.Account.Username in a database.
-            return true;
+              return this._authenticationResult != null;
         }
 
         public string GetAccountUserName()
@@ -103,20 +117,11 @@ namespace Kfone.Core.Services
                 return "_authenticationResult.AccessToken";
             }
             else
-            {
-                try
-                {
-                    // Interactive authentication is required
-                    _authenticationResult = null;
-                    return "_authenticationResult.AccessToken";
-                }
-                catch (Exception)
-                {
+            { 
                     // AcquireTokenSilent and AcquireTokenInteractive failed, the session will be closed.
                     _authenticationResult = null;
                     LoggedOut?.Invoke(this, EventArgs.Empty);
                     return string.Empty;
-                }
             }
         }
 
@@ -131,8 +136,15 @@ namespace Kfone.Core.Services
 
             try
             {
-                _authenticationResult = null;
-                return true;
+                _authenticationResult = await _client.LoginAsync(new LoginRequest());
+
+                if (this.IsAuthorized())
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
             }
             catch (Exception)
             {

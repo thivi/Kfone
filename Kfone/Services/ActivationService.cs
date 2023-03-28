@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 using Kfone.Activation;
 using Kfone.Core.Helpers;
-using Kfone.Core.Services;
 
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;

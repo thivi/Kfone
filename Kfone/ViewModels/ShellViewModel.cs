@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Kfone.Core.Helpers;
-using Kfone.Core.Services;
 using Kfone.Helpers;
 using Kfone.Services;
 using Kfone.Views;

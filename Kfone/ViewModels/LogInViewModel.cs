@@ -1,7 +1,7 @@
 ﻿using System;
 
 using Kfone.Core.Helpers;
-using Kfone.Core.Services;
+using Kfone.Services;
 using Kfone.Helpers;
 
 using Microsoft.Toolkit.Mvvm.ComponentModel;
