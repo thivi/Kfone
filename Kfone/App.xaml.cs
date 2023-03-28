@@ -39,6 +39,15 @@ namespace Kfone
 
         protected override async void OnActivated(IActivatedEventArgs args)
         {
+            // When the app was activated by a Protocol (custom URI scheme), forwards
+            // the URI to the SystemBrowser through a static method.
+            if (args.Kind == ActivationKind.Protocol)
+            {
+                // Extracts the authorization response URI from the arguments.
+                ProtocolActivatedEventArgs protocolArgs = (ProtocolActivatedEventArgs)args;
+                Uri uri = protocolArgs.Uri;
+                SystemBrowser.ProcessResponse(uri);
+            }
             await ActivationService.ActivateAsync(args);
         }
 
