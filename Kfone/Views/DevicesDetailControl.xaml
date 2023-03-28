@@ -15,32 +15,31 @@
         VerticalScrollMode="Enabled"
         IsTabStop="True">
         <StackPanel HorizontalAlignment="Left">
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
-                <TextBlock
-                    Margin="{StaticResource SmallLeftMargin}"
-                    VerticalAlignment="Center"
-                    Text="{x:Bind ListMenuItem.Name, Mode=OneWay}"
-                    Style="{ThemeResource TitleTextBlockStyle}" />
-                <Image
-                    Grid.Column="0"
+            <Image
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Source="{x:Bind ListMenuItem.Image}"
-                    Width="300"/>
+                    Source="{x:Bind ListMenuItem.image}"
+                    Width="200"
+             />
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Text="{x:Bind ListMenuItem.name, Mode=OneWay}"
+                    Style="{ThemeResource TitleTextBlockStyle}" />
             </StackPanel>
             <StackPanel Name="block" Padding="0,15,0,0">
                 <TextBlock Style="{StaticResource DetailSubTitleStyle}" Text="Type" />
-                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ListMenuItem.Type, Mode=OneWay}" />
+                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ListMenuItem.type, Mode=OneWay}" />
                 <TextBlock
                     Margin="{StaticResource SmallTopMargin}"
                     Style="{StaticResource DetailSubTitleStyle}"
                     Text="Price" />
-                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ListMenuItem.Price, Mode=OneWay}" />
+                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ListMenuItem.price, Mode=OneWay}" />
                 <TextBlock
                     Margin="{StaticResource SmallTopMargin}"
                     Style="{StaticResource DetailSubTitleStyle}"
                     Text="Brand" />
-                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ListMenuItem.Brand, Mode=OneWay}" />
+                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ListMenuItem.brand, Mode=OneWay}" />
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

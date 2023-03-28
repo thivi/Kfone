@@ -9,13 +9,13 @@ namespace Kfone.Views
 {
     public sealed partial class PromotionsDetailControl : UserControl
     {
-        public SampleOrder ListMenuItem
+        public Promotion ListMenuItem
         {
-            get { return GetValue(ListMenuItemProperty) as SampleOrder; }
+            get { return GetValue(ListMenuItemProperty) as Promotion; }
             set { SetValue(ListMenuItemProperty, value); }
         }
 
-        public static readonly DependencyProperty ListMenuItemProperty = DependencyProperty.Register("ListMenuItem", typeof(SampleOrder), typeof(PromotionsDetailControl), new PropertyMetadata(null, OnListMenuItemPropertyChanged));
+        public static readonly DependencyProperty ListMenuItemProperty = DependencyProperty.Register("ListMenuItem", typeof(Promotion), typeof(PromotionsDetailControl), new PropertyMetadata(null, OnListMenuItemPropertyChanged));
 
         public PromotionsDetailControl()
         {

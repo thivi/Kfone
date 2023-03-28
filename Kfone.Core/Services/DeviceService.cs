@@ -9,7 +9,7 @@ namespace Kfone.Core.Services
     {
         public static List<Device> Devices = new List<Device>(new Device[]
         {
-            new Device{Name="Moto G4", Brand="Motorola", Price=70000, Type=DeviceType.Smartphone, Image="https://d11zer3aoz69xt.cloudfront.net/media/catalog/product/cache/1/image/1200x/9df78eab33525d08d6e5fb8d27136e95/m/o/motorola_moto_g_plus_4th_generation_16gb_2gb_ram_black_1_2.jpg"}
+            new Device{name="Moto G4", brand="Motorola", price=70000, type=DeviceType.Smartphone, image="https://d11zer3aoz69xt.cloudfront.net/media/catalog/product/cache/1/image/1200x/9df78eab33525d08d6e5fb8d27136e95/m/o/motorola_moto_g_plus_4th_generation_16gb_2gb_ram_black_1_2.jpg"}
         });
 
         public static List<Device> GetDevices ()

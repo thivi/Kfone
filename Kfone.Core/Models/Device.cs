@@ -13,10 +13,15 @@ namespace Kfone.Core.Models
 
     public class Device
     {
-        public string Name { get; set; }
-        public float Price { get; set; }
-        public string Brand { get; set; }
-        public DeviceType Type { get; set; }
-        public string Image { get; set; }
+        public string name { get; set; }
+        public float price { get; set; }
+        public string brand { get; set; }
+        public DeviceType type { get; set; }
+        public string image { get; set; }
+
+        override public string ToString()
+        {
+            return name;
+        }
     }
 }

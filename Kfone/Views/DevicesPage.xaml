@@ -26,14 +26,14 @@
                 <Image
                     Grid.Column="0"
                     VerticalAlignment="Center"
-                    Source="{x:Bind Image}"
+                    Source="{x:Bind image}"
                 />
                 <StackPanel
                     Grid.Column="1"
                     Margin="{StaticResource SmallLeftMargin}"
                     VerticalAlignment="Center">
-                    <TextBlock Style="{ThemeResource ListTitleStyle}" Text="{x:Bind Name}" />
-                    <TextBlock Style="{StaticResource ListSubTitleStyle}" Text="{x:Bind Type}" />
+                    <TextBlock Style="{ThemeResource ListTitleStyle}" Text="{x:Bind name}" />
+                    <TextBlock Style="{StaticResource ListSubTitleStyle}" Text="{x:Bind type}" />
                 </StackPanel>
             </Grid>
         </DataTemplate>

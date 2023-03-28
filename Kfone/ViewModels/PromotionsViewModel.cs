@@ -13,15 +13,15 @@ namespace Kfone.ViewModels
 {
     public class PromotionsViewModel : ObservableObject
     {
-        private SampleOrder _selected;
+        private Promotion _selected;
 
-        public SampleOrder Selected
+        public Promotion Selected
         {
             get { return _selected; }
             set { SetProperty(ref _selected, value); }
         }
 
-        public ObservableCollection<SampleOrder> SampleItems { get; private set; } = new ObservableCollection<SampleOrder>();
+        public ObservableCollection<Promotion> SampleItems { get; private set; } = new ObservableCollection<Promotion>();
 
         public PromotionsViewModel()
         {
@@ -31,7 +31,7 @@ namespace Kfone.ViewModels
         {
             SampleItems.Clear();
 
-            var data = await SampleDataService.GetListDetailsDataAsync();
+            var data = PromotionService.GetPromotions();
 
             foreach (var item in data)
             {

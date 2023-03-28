@@ -27,7 +27,7 @@ namespace Kfone.Views
             string image = ImageURL.Text;
             DeviceType deviceType = (DeviceType)TypeComboBox.SelectedItem;
 
-            Device device = new Device { Type = deviceType, Name = name, Price = price, Brand = brand, Image = image };
+            Device device = new Device { type = deviceType, name = name, price = price, brand = brand, image = image };
 
             ViewModel.AddDevice(device);
 
