@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Configuration;
 using System.Linq;
+using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
+using IdentityModel.Client;
 using IdentityModel.OidcClient;
 
 using Kfone.Core.Helpers;
+using Windows.Media.Protection.PlayReady;
 
 namespace Kfone.Services
 {
@@ -39,13 +42,27 @@ namespace Kfone.Services
 
             var options = new OidcClientOptions
             {
-                Authority = "https://api.asgardeo.io/t/thivi",
-                ClientId = "NMxHm9npKWDsfowttB4RcTgVJDca",
-                ClientSecret = "3LdTVHw0VzC0_CoP36jjuWxXwy4a",
+                Authority = "https://api.asgardeo.io/t/kfoneteam2/oauth2/token",
+                ClientId = "lp79hGwq602Hx7jjhDuTlv08EOMa",
+                ClientSecret = "MfyTzRqPhHROq4MIQ2l67rs_woMa",
                 Scope = "openid profile",
                 RedirectUri = "kfone://callback",
-                Browser = new SystemBrowser()
+                Browser = new SystemBrowser(),
+                Policy = new Policy
+                {
+                    Discovery = new IdentityModel.Client.DiscoveryPolicy
+                    {
+                        AdditionalEndpointBaseAddresses =
+                        {
+                            "https://api.asgardeo.io/t/kfoneteam2/oauth2",
+                            "https://api.asgardeo.io/t/kfoneteam2/oauth2/token",
+                            "https://api.asgardeo.io/t/kfoneteam2/oidc",
+                            "https://api.asgardeo.io/t/kfoneteam2"
+                        }
+                    }
+                }
             };
+
 
             _client = new OidcClient(options);
         }
@@ -61,8 +78,9 @@ namespace Kfone.Services
 
             try
             {
-
-
+                var httpClient = new HttpClient();
+                var disco = await httpClient.GetDiscoveryDocumentAsync("https://api.asgardeo.io/t/kfoneteam2/oauth2/token/.well-known/openid-configuration");
+                if (disco.IsError) throw new Exception(disco.Error);
                 _authenticationResult = await _client.LoginAsync(new LoginRequest());
 
                 if (!IsAuthorized())
@@ -89,7 +107,7 @@ namespace Kfone.Services
 
         public string GetAccountUserName()
         {
-            return "Asgardeo User";
+            return _authenticationResult.User.Claims.Where(claim => claim.Type == "given_name").ToList()[0].Value;
         }
 
         public async Task LogoutAsync()
@@ -114,7 +132,7 @@ namespace Kfone.Services
             var acquireTokenSuccess = await AcquireTokenSilentAsync(scopes);
             if (acquireTokenSuccess)
             {
-                return "_authenticationResult.AccessToken";
+                return _authenticationResult.AccessToken;
             }
             else
             { 
