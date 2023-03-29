@@ -1,0 +1,57 @@
+﻿<Page
+    x:Class="Kfone.Views.Add_CustomerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xaml="using:Windows.UI.Xaml"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+    <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
+        <StackPanel
+            Grid.Column="1"
+            Margin="{StaticResource SmallLeftMargin}"
+            VerticalAlignment="Stretch" >
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+            <TextBox x:Name="Name" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Enter a name" VerticalAlignment="Top" Width="206"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Date of Birth" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+            <CalendarDatePicker x:Name="dob"  VerticalAlignment="Top" Width="206"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Contact No." VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+            <TextBox x:Name="contactNo"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Enter a contact no." VerticalAlignment="Top" Width="206"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Address" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+            <TextBox x:Name="address" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Enter a address" VerticalAlignment="Top" Width="206"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Profile Picture" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+            <TextBox x:Name="profilePic" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Enter a profile picture url" VerticalAlignment="Top" Width="206"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Loyalty Tier" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton
+                x:Name="GoldTier"
+                GroupName="Tiers"
+                Content="Gold"
+                >
+                </RadioButton>
+                <RadioButton
+                    x:Name="SilverTier"
+                    GroupName="Tiers"
+                     Content="Silver">
+                </RadioButton>
+                <RadioButton
+                    x:Name="PlatinumTier"
+                    GroupName="Tiers"
+                    Content="Platinum">
+                </RadioButton>
+                <RadioButton
+                    x:Name="NoneTier"
+                    FontSize="15"
+                    GroupName="Tiers"
+                    Content="None">
+                </RadioButton>
+            </StackPanel>
+            <Button Content="Add Customer" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}" Click="Button_Click"/>
+            <!--
+                The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
+                Place your content here.
+            -->
+        </StackPanel>
+    </Grid>
+</Page>

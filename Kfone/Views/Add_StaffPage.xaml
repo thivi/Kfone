@@ -7,8 +7,7 @@
     x:Class="Kfone.Views.Add_StaffPage"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
-    <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Auto">
-        <Grid x:Name="ContentArea" Margin="{ThemeResource SmallLeftMargin}">
+    <Grid x:Name="ContentArea" Margin="{ThemeResource SmallLeftMargin}">
             <StackPanel
             Grid.Column="1"
             Margin="{StaticResource SmallLeftMargin}"
@@ -34,5 +33,4 @@
             -->
             </StackPanel>
         </Grid>
-    </ScrollViewer>
 </Page>

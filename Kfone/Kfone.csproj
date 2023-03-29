@@ -168,6 +168,7 @@
     <Compile Include="Services\SystemBrowser.cs" />
     <Compile Include="Services\ThemeSelectorService.cs" />
     <Compile Include="Services\UserDataService.cs" />
+    <Compile Include="ViewModels\Add_CustomerViewModel.cs" />
     <Compile Include="ViewModels\Add_DeviceViewModel.cs" />
     <Compile Include="ViewModels\Add_PromotionViewModel.cs" />
     <Compile Include="ViewModels\Add_StaffViewModel.cs" />
@@ -185,6 +186,9 @@
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\StaffViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="Views\Add_CustomerPage.xaml.cs">
+      <DependentUpon>Add_CustomerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Add_DevicePage.xaml.cs">
       <DependentUpon>Add_DevicePage.xaml</DependentUpon>
     </Compile>
@@ -254,6 +258,9 @@
     <Compile Include="Views\StaffPage.xaml.cs">
       <DependentUpon>StaffPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CustomerView.xaml.cs">
+      <DependentUpon>CustomerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\StaffView.xaml.cs">
       <DependentUpon>StaffView.xaml</DependentUpon>
     </Compile>
@@ -288,6 +295,10 @@
     <Page Include="Styles\TextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Add_CustomerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Add_DevicePage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -378,6 +389,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\StaffPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CustomerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
