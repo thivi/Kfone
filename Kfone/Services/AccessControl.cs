@@ -24,11 +24,11 @@ namespace Kfone.Services
             _pageAccess.Add("Devices", adminOnly);
             _pageAccess.Add("Services", adminOnly);
             _pageAccess.Add("Promotions", adminSales);
-            _pageAccess.Add("Customers", adminMarketing);
+            _pageAccess.Add("Customers", all);
             _pageAccess.Add("Staff", adminOnly);
             _pageAccess.Add("Dashboard", all);
 
-            _granularAccess.Add("create_customers", adminOnly);
+            _granularAccess.Add("create_customers", adminSales);
         }
 
         public bool ShouldShowPage(string page)
