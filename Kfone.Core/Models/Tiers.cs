@@ -8,6 +8,7 @@ namespace Kfone.Core.Models
     {
         Gold,
         Silver,
-        Platinum
+        Platinum,
+        None
     }
 }

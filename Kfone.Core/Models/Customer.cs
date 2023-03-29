@@ -10,6 +10,7 @@ namespace Kfone.Core.Models
         public DateTime dob { get; set; }
         public string contactNo { get; set; }
         public string address { get; set; }
-        public Tiers
+        public Tiers tier { get; set; }
+        public string profilePic { get; set; }
     }
 }

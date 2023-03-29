@@ -333,4 +333,8 @@
     <value>Add_Promotion</value>
     <comment>Navigation view item name for Add_Promotion</comment>
   </data>
+  <data name="Shell_Add_Customer.Content" xml:space="preserve">
+    <value>Add_Customer</value>
+    <comment>Navigation view item name for Add_Customer</comment>
+  </data>
 </root>

@@ -13,15 +13,15 @@ namespace Kfone.ViewModels
 {
     public class CustomersViewModel : ObservableObject
     {
-        private SampleOrder _selected;
+        private Customer _selected;
 
-        public SampleOrder Selected
+        public Customer Selected
         {
             get { return _selected; }
             set { SetProperty(ref _selected, value); }
         }
 
-        public ObservableCollection<SampleOrder> SampleItems { get; private set; } = new ObservableCollection<SampleOrder>();
+        public ObservableCollection<Customer> SampleItems { get; private set; } = new ObservableCollection<Customer>();
 
         public CustomersViewModel()
         {
@@ -31,7 +31,7 @@ namespace Kfone.ViewModels
         {
             SampleItems.Clear();
 
-            var data = await SampleDataService.GetListDetailsDataAsync();
+            var data = CustomerService.GetCustomers();
 
             foreach (var item in data)
             {
