@@ -3,6 +3,7 @@
 using Kfone.ViewModels;
 
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace Kfone.Views
 {
@@ -13,6 +14,13 @@ namespace Kfone.Views
         public DashboardPage()
         {
             InitializeComponent();
+        }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            await ViewModel.LoadDataAsync();
         }
     }
 }

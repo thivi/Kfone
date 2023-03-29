@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Style="{StaticResource PageStyle}"
+    xmlns:tc="using:Telerik.UI.Xaml.Controls.Chart"
     mc:Ignorable="d">
 
     <Grid 
@@ -18,23 +19,25 @@
                 </DataTemplate>
             </Pivot.HeaderTemplate>
             <PivotItem x:Uid="Dashboard_PivotItem1">
-                <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                    <!--
-                        The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
-                        Place your content here.
-                    -->
-
-                </Grid>
-            </PivotItem>
-            
-            <PivotItem x:Uid="Dashboard_PivotItem2">
-                <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                    <!--
-                        The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
-                        Place your content here.
-                    -->
-
-                </Grid>
+                    <Grid
+            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                        <tc:RadCartesianChart x:Uid="CartesianChart">
+                            <tc:RadCartesianChart.HorizontalAxis>
+                                <tc:CategoricalAxis />
+                            </tc:RadCartesianChart.HorizontalAxis>
+                            <tc:RadCartesianChart.VerticalAxis>
+                                <tc:LinearAxis />
+                            </tc:RadCartesianChart.VerticalAxis>
+                            <tc:BarSeries ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}" ShowLabels="True">
+                                <tc:BarSeries.CategoryBinding>
+                                    <tc:PropertyNameDataPointBinding PropertyName="Category" />
+                                </tc:BarSeries.CategoryBinding>
+                                <tc:BarSeries.ValueBinding>
+                                    <tc:PropertyNameDataPointBinding PropertyName="Value" />
+                                </tc:BarSeries.ValueBinding>
+                            </tc:BarSeries>
+                        </tc:RadCartesianChart>
+                    </Grid>
             </PivotItem>
         </Pivot>
     </Grid>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -104,7 +105,8 @@ namespace Kfone.ViewModels
 
         private void OnUserProfile()
         {
-            NavigationService.Navigate<SettingsPage>();
+            Windows.System.Launcher.LaunchUriAsync(new Uri("https://myaccount.asgardeo.io/t/kfoneteam2"));
+
         }
 
         private void OnItemInvoked(WinUI.NavigationViewItemInvokedEventArgs args)
