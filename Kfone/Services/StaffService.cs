@@ -178,7 +178,7 @@ namespace Kfone.Services
         private static async Task GetAllUser()
         {
 
-            string url = $"https://api.asgardeo.io/t/kfoneteam2/scim2/Users";
+            string url = $"https://api.asgardeo.io/t/kfoneteam2/scim2/Users?domain=DEFAULT";
             string[] scopes = { "internal_user_mgt_list" };
             string access_token = await _identityService.GetAccessTokenAsync(scopes);
 
