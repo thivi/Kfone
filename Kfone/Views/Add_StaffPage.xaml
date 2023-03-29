@@ -7,43 +7,32 @@
     x:Class="Kfone.Views.Add_StaffPage"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
-    <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
-        <Grid
-            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-            <TextBox HorizontalAlignment="Left" Margin="176,63,0,0" TextWrapping="Wrap" Text="Enter a name" VerticalAlignment="Top" Width="236"/>
-            <TextBlock HorizontalAlignment="Left" Margin="176,39,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged"/>
-            <TextBox HorizontalAlignment="Left" Margin="176,146,0,0" TextWrapping="Wrap" Text="Enter a contact no." VerticalAlignment="Top" Width="236"/>
-            <TextBlock HorizontalAlignment="Left" Margin="176,122,0,0" TextWrapping="Wrap" Text="Contact No." VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged"/>
-            <TextBox HorizontalAlignment="Left" Margin="176,233,0,0" TextWrapping="Wrap" Text="Enter a address" VerticalAlignment="Top" Width="236"/>
-            <TextBlock HorizontalAlignment="Left" Margin="176,209,0,0" TextWrapping="Wrap" Text="Address" VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged"/>
-            <CalendarDatePicker Margin="176,307,0,0" VerticalAlignment="Top" Width="236"/>
-            <TextBlock HorizontalAlignment="Left" Margin="176,283,0,0" TextWrapping="Wrap" Text="Joined Date" VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged"/>
-            <Custom:RadioButtons HorizontalAlignment="Left" Height="0" Margin="412,440,0,0" VerticalAlignment="Top" Width="0"/>
-            <RadioButton Content="Admin" Margin="176,363,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked_1"/>
-            <Grid
-                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                <TextBox HorizontalAlignment="Left" Margin="176,63,0,0" TextWrapping="Wrap" Text="Enter a name" VerticalAlignment="Top" Width="236"/>
-                <TextBlock HorizontalAlignment="Left" Margin="176,39,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged"/>
-                <TextBox HorizontalAlignment="Left" Margin="176,146,0,0" TextWrapping="Wrap" Text="Enter a contact no." VerticalAlignment="Top" Width="236"/>
-                <TextBlock HorizontalAlignment="Left" Margin="176,122,0,0" TextWrapping="Wrap" Text="Contact No." VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged"/>
-                <TextBox HorizontalAlignment="Left" Margin="176,233,0,0" TextWrapping="Wrap" Text="Enter a address" VerticalAlignment="Top" Width="236"/>
-                <TextBlock HorizontalAlignment="Left" Margin="176,209,0,0" TextWrapping="Wrap" Text="Address" VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged"/>
-                <CalendarDatePicker Margin="176,307,0,0" VerticalAlignment="Top" Width="236"/>
-                <TextBlock HorizontalAlignment="Left" Margin="176,283,0,0" TextWrapping="Wrap" Text="Joined Date" VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged"/>
-                <Custom:RadioButtons HorizontalAlignment="Left" Height="0" Margin="412,440,0,0" VerticalAlignment="Top" Width="0"/>
-                <RadioButton Content="Admin" Margin="176,363,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked_1"/>
-                <RadioButton Content="Sales" Margin="262,363,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked_1"/>
-                <RadioButton Content="Marketing" Margin="342,363,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked_1"/>
-                <Button Content="Add Staff" Margin="364,424,0,0" VerticalAlignment="Top"/>
+    <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Auto">
+        <Grid x:Name="ContentArea" Margin="{ThemeResource SmallLeftMargin}">
+            <StackPanel
+            Grid.Column="1"
+            Margin="{StaticResource SmallLeftMargin}"
+            VerticalAlignment="Stretch" >
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+                <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="Enter a name" VerticalAlignment="Top" Width="206"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Date of Birth" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+                <CalendarDatePicker VerticalAlignment="Top" Width="206"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Contact No." VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+                <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="Enter a contact no." VerticalAlignment="Top" Width="206"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Address" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+                <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="Enter a address" VerticalAlignment="Top" Width="206"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Joined Date" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+                <CalendarDatePicker VerticalAlignment="Top" Width="206"/>
+                <Custom:RadioButtons HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0" Margin="{ThemeResource MediumTopMargin}"/>
+                <RadioButton Content="Admin" VerticalAlignment="Top" Checked="RadioButton_Checked_1"/>
+                <RadioButton Content="Sales" VerticalAlignment="Top" Checked="RadioButton_Checked_1"/>
+                <RadioButton Content="Marketing" VerticalAlignment="Top" Checked="RadioButton_Checked_1"/>
+                <Button Content="Add Staff" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
                 <!--
                 The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
                 Place your content here.
             -->
-            </Grid>
-            <!--
-                The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
-                Place your content here.
-            -->
+            </StackPanel>
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </Page>

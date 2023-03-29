@@ -9,10 +9,17 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     
     <Grid>
-        <StackPanel>
-            <Button x:Name="addStaffButton" Content="Add Staff" Click="addStaffButton_Click"></Button>
-            <Button x:Name="cancelStaffButton" Content="Cancel" Click="cancelStaffButton_Click"/>
-            <Frame Name="Frame" Width="auto" Height="auto"></Frame>
+        <StackPanel
+            Grid.Column="1"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            >
+            <Grid HorizontalAlignment="Right">
+                <Button x:Name="addStaffButton" Content="Add Staff" Click="addStaffButton_Click" Margin="{ThemeResource SmallLeftTopRightBottomMargin}"/>
+                <Button x:Name="cancelStaffButton" Content="Cancel" Click="cancelStaffButton_Click" Margin="{ThemeResource SmallLeftTopRightBottomMargin}"/>
+            </Grid>
+
+            <Frame Name="Frame" Width="Auto" Height="Auto"></Frame>
         </StackPanel>
     </Grid>
 </Page>
