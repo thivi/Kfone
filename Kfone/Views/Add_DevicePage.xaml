@@ -22,7 +22,7 @@
             <TextBox x:Name="ImageURL" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" PlaceholderText="Enter an image URL" VerticalAlignment="Top" Width="206"/>
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Type" VerticalAlignment="Top" Width="68" Margin="{ThemeResource MediumTopMargin}"/>
             <ComboBox x:Name="TypeComboBox" Width="206" PlaceholderText="Select a type" IsDropDownOpen="True"/>
-            <Button Content="Add Device" Click="Button_Click" Margin="{ThemeResource MediumTopMargin}"/>
+            <Button Content="Add Device" Click="Button_Click" Margin="{ThemeResource MediumTopMargin}" Background="{ThemeResource SystemAccentColor}"/>
 
             <!--
                 The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 

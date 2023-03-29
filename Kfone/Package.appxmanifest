@@ -39,7 +39,7 @@
         Description="ms-resource:AppDescription"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\Square71x71Logo.png"/>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:SplashScreen Image="Assets\kfone.png"  BackgroundColor="#d0021b"/>
       </uap:VisualElements>
 
       <Extensions>

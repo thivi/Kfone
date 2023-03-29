@@ -15,7 +15,7 @@
             HorizontalAlignment="Stretch"
             >
             <Grid HorizontalAlignment="Right">
-                <Button x:Name="addPromotionButton" Content="Add Promotion" Click="addPromotionButton_Click" Margin="{ThemeResource SmallLeftTopRightBottomMargin}"/>
+                <Button x:Name="addPromotionButton" Content="Add Promotion" Click="addPromotionButton_Click" Margin="{ThemeResource SmallLeftTopRightBottomMargin}" Background="{ThemeResource SystemAccentColor}"/>
                 <Button x:Name="cancelPromotionButton" Content="Cancel" Click="cancelPromotionButton_Click" Margin="{ThemeResource SmallLeftTopRightBottomMargin}"/>
             </Grid>
 

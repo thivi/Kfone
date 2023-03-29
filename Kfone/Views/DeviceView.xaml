@@ -15,7 +15,7 @@
             HorizontalAlignment="Stretch"
             >
             <Grid HorizontalAlignment="Right">
-                <Button x:Name="addDeviceButton" Content="Add Device" Click="addDeviceButton_Click" Margin="{ThemeResource SmallLeftTopRightBottomMargin}"/>
+                <Button x:Name="addDeviceButton" Content="Add Device" Click="addDeviceButton_Click" Margin="{ThemeResource SmallLeftTopRightBottomMargin}" Background="{ThemeResource SystemAccentColor}"/>
                 <Button x:Name="cancelDeviceButton" Content="Cancel" Click="cancelDeviceButton_Click" Margin="{ThemeResource SmallLeftTopRightBottomMargin}"/>
             </Grid>
             

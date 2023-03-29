@@ -28,7 +28,7 @@
                 <RadioButton Content="Admin" VerticalAlignment="Top" Checked="RadioButton_Checked_1"/>
                 <RadioButton Content="Sales" VerticalAlignment="Top" Checked="RadioButton_Checked_1"/>
                 <RadioButton Content="Marketing" VerticalAlignment="Top" Checked="RadioButton_Checked_1"/>
-                <Button Content="Add Staff" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+            <Button Content="Add Staff" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}" Background="{ThemeResource SystemAccentColor}"/>
                 <!--
                 The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
                 Place your content here.

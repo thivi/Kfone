@@ -11,6 +11,7 @@ using Kfone.Core.Helpers;
 using Kfone.Core.Models;
 using Windows.ApplicationModel.Core;
 using Windows.Media.Protection.PlayReady;
+using Windows.UI.Xaml;
 
 namespace Kfone.Services
 {
@@ -165,9 +166,9 @@ namespace Kfone.Services
                     BrowserDisplayMode = IdentityModel.OidcClient.Browser.DisplayMode.Hidden
                 };
                 await _client.LogoutAsync(logoutRequest);
-                CoreApplication.Exit();
                 _authenticationResult = null;
                 LoggedOut?.Invoke(this, EventArgs.Empty);
+                Application.Current.Exit();
             }
             catch (Exception)
             {
