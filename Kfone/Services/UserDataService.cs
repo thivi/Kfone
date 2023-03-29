@@ -91,15 +91,11 @@ namespace Kfone.Services
                 return null;
             }
 
-            var userPhoto = string.IsNullOrEmpty(userData.Photo)
-                ? ImageHelper.ImageFromAssetsFile("DefaultIcon.png")
-                : await ImageHelper.ImageFromStringAsync(userData.Photo);
-
             return new UserViewModel()
             {
                 Name = userData.DisplayName,
                 UserPrincipalName = userData.UserPrincipalName,
-                Photo = userPhoto
+                Photo = "https://cdn3.iconfinder.com/data/icons/web-design-and-development-2-6/512/87-1024.png"
             };
         }
 
@@ -108,7 +104,7 @@ namespace Kfone.Services
             return new UserViewModel()
             {
                 Name = IdentityService.GetAccountUserName(),
-                Photo = ImageHelper.ImageFromAssetsFile("DefaultIcon.png")
+                Photo = IdentityService.GetUserProfilePic()
             };
         }
     }

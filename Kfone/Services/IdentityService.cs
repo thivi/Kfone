@@ -109,6 +109,18 @@ namespace Kfone.Services
             return _authenticationResult.User.Claims.Where(claim => claim.Type == "given_name").ToList()[0].Value;
         }
 
+        public string GetUserProfilePic()
+        {
+            try
+            {
+                return _authenticationResult.User.Claims?.Where(claim => claim.Type == "profileUrl")?.ToList()?[0]?.Value;
+            }
+            catch (Exception)
+            {
+                return "https://cdn3.iconfinder.com/data/icons/web-design-and-development-2-6/512/87-1024.png";
+            }
+        }
+
         public Roles GetUserRole()
         {
             Roles role;

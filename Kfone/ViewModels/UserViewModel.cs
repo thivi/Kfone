@@ -12,7 +12,7 @@ namespace Kfone.ViewModels
     {
         private string _name;
         private string _userPrincipalName;
-        private BitmapImage _photo;
+        private string _photo;
 
         public string Name
         {
@@ -26,7 +26,7 @@ namespace Kfone.ViewModels
             set => SetProperty(ref _userPrincipalName, value);
         }
 
-        public BitmapImage Photo
+        public string Photo
         {
             get => _photo;
             set => SetProperty(ref _photo, value);
