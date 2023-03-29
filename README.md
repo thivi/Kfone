@@ -55,7 +55,17 @@ This will load the Asgardeo login page into a web view. (By defining SystemBrows
 
 The returned login result will indicate whether authentication was successful, and if so contain the tokens and claims of the user.
 
+We call the LogoutAsync method to logout the user:
+
 ```
+await _client.LogoutAsync(new LogoutRequest());
+```
+> We are requesting group scope in this applictaion for group-based access control.
+
+### MFA
+
+MFA has been implemented for staff members, using multi-options for basic authentication and magic link for step one, and TOTP for step two. 
+Backup codes can only be used by the administrator. 
 
 ### Access Control
 
@@ -91,10 +101,6 @@ var onLoginRequest = function(context) {
 
 * Application views are restricted based on staff category using group-based access control. 
 
-### MFA
+### Customer Handling 
 
-MFA has been implemented for staff members, using multi-options for basic authentication and magic link for step one, and TOTP for step two. 
-Backup codes can only be used by the administrator. 
-
-
-
+We use SCIM2 APIs to create, retrieve, update, and delete customers. In order to invoke these APIs, we maintain another token with the necessary scopes.
