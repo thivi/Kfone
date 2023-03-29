@@ -55,10 +55,6 @@ This will load the Asgardeo login page into a web view. (By defining SystemBrows
 
 The returned login result will indicate whether authentication was successful, and if so contain the tokens and claims of the user.
 
-We call theLogoutAsync method to logout the user:
-
-```
-await _client.LogoutAsync(new LogoutRequest());
 ```
 
 ### Access Control
