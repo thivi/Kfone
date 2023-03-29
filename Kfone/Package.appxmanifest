@@ -17,7 +17,7 @@
   <Properties>
     <DisplayName>Kfone</DisplayName>
     <PublisherDisplayName>WSO2</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
+    <Logo>Assets\Blue.png</Logo>
   </Properties>
 
   <Dependencies>
@@ -35,11 +35,12 @@
       <uap:VisualElements
         DisplayName="ms-resource:AppDisplayName"
         Square150x150Logo="Assets\Square150x150Logo.png"
-        Square44x44Logo="Assets\kfone.png"
+        Square44x44Logo="Assets\Blue.png"
         Description="ms-resource:AppDescription"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\Square71x71Logo.png"/>
-        <uap:SplashScreen Image="Assets\kfone.png"  BackgroundColor="#d0021b"/>
+        <uap:SplashScreen Image="Assets\Splash.png"  BackgroundColor="#1565C0"/>
+        <uap:LockScreen BadgeLogo="Assets\Blue.png" Notification="badge"/>
       </uap:VisualElements>
 
       <Extensions>

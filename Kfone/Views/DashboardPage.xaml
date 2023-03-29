@@ -11,34 +11,24 @@
     <Grid 
         x:Name="ContentArea"
         Margin="{StaticResource SmallLeftRightMargin}">
-        <Pivot
-            x:Name="Items">
-            <Pivot.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{Binding}" />
-                </DataTemplate>
-            </Pivot.HeaderTemplate>
-            <PivotItem x:Uid="Dashboard_PivotItem1">
-                    <Grid
+        <Grid
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                        <tc:RadCartesianChart x:Uid="CartesianChart">
-                            <tc:RadCartesianChart.HorizontalAxis>
-                                <tc:CategoricalAxis />
-                            </tc:RadCartesianChart.HorizontalAxis>
-                            <tc:RadCartesianChart.VerticalAxis>
-                                <tc:LinearAxis />
-                            </tc:RadCartesianChart.VerticalAxis>
-                            <tc:BarSeries ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}" ShowLabels="True">
-                                <tc:BarSeries.CategoryBinding>
-                                    <tc:PropertyNameDataPointBinding PropertyName="Category" />
-                                </tc:BarSeries.CategoryBinding>
-                                <tc:BarSeries.ValueBinding>
-                                    <tc:PropertyNameDataPointBinding PropertyName="Value" />
-                                </tc:BarSeries.ValueBinding>
-                            </tc:BarSeries>
-                        </tc:RadCartesianChart>
-                    </Grid>
-            </PivotItem>
-        </Pivot>
+            <tc:RadCartesianChart x:Uid="CartesianChart">
+                <tc:RadCartesianChart.HorizontalAxis>
+                    <tc:CategoricalAxis />
+                </tc:RadCartesianChart.HorizontalAxis>
+                <tc:RadCartesianChart.VerticalAxis>
+                    <tc:LinearAxis/>
+                </tc:RadCartesianChart.VerticalAxis>
+                <tc:LineSeries ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}" ShowLabels="True">
+                    <tc:LineSeries.CategoryBinding>
+                        <tc:PropertyNameDataPointBinding PropertyName="Category" />
+                    </tc:LineSeries.CategoryBinding>
+                    <tc:LineSeries.ValueBinding>
+                        <tc:PropertyNameDataPointBinding PropertyName="Value" />
+                    </tc:LineSeries.ValueBinding>
+                </tc:LineSeries>
+            </tc:RadCartesianChart>
+        </Grid>
     </Grid>
 </Page>

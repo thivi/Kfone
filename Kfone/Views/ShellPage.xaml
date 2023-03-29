@@ -33,12 +33,28 @@
             Or to use an IconElement instead of a Symbol see https://github.com/microsoft/TemplateStudio/blob/main/docs/UWP/projectTypes/navigationpane.md
             Edit String/en-US/Resources.resw: Add a menu item title for each page
             -->
-            <winui:NavigationViewItem x:Uid="Shell_Dashboard" Icon="Home" helpers:NavHelper.NavigateTo="views:DashboardPage" />
+            <winui:NavigationViewItem x:Uid="Shell_Dashboard" helpers:NavHelper.NavigateTo="views:DashboardPage">
+                <winui:NavigationViewItem.Icon>
+                    <SymbolIcon Symbol="Home"/>
+                </winui:NavigationViewItem.Icon>
+            </winui:NavigationViewItem>
             <!--<winui:NavigationViewItem x:Uid="Shell_Profile" Icon="Document" helpers:NavHelper.NavigateTo="views:ProfilePage" />-->
-            <winui:NavigationViewItem x:Uid="Shell_Devices" Icon="Phone" helpers:NavHelper.NavigateTo="views:DeviceView" />
+            <winui:NavigationViewItem x:Uid="Shell_Devices" helpers:NavHelper.NavigateTo="views:DeviceView">
+                <winui:NavigationViewItem.Icon>
+                    <SymbolIcon Symbol="CellPhone"/>
+                </winui:NavigationViewItem.Icon>
+            </winui:NavigationViewItem>
             <!--<winui:NavigationViewItem x:Uid="Shell_Services" Icon="Document" helpers:NavHelper.NavigateTo="views:ServicesPage" />-->
-            <winui:NavigationViewItem x:Uid="Shell_Promotions" Icon="Contact" helpers:NavHelper.NavigateTo="views:PromotionsView" />
-            <winui:NavigationViewItem x:Uid="Shell_Customers" Icon="People" helpers:NavHelper.NavigateTo="views:CustomerView" />
+            <winui:NavigationViewItem x:Uid="Shell_Promotions" helpers:NavHelper.NavigateTo="views:PromotionsView">
+                <winui:NavigationViewItem.Icon>
+                    <SymbolIcon Symbol="Priority"/>
+                </winui:NavigationViewItem.Icon>
+            </winui:NavigationViewItem>
+            <winui:NavigationViewItem x:Uid="Shell_Customers" helpers:NavHelper.NavigateTo="views:CustomerView">
+                <winui:NavigationViewItem.Icon>
+                    <SymbolIcon Symbol="People"/>
+                </winui:NavigationViewItem.Icon>
+            </winui:NavigationViewItem>
         </winui:NavigationView.MenuItems>
         <i:Interaction.Behaviors>
             <behaviors:NavigationViewHeaderBehavior

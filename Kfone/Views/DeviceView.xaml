@@ -9,17 +9,15 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid>
+            <Frame x:Name="Frame"></Frame>
+        </Grid>
         <StackPanel
             Grid.Column="1"
-            VerticalAlignment="Stretch"
-            HorizontalAlignment="Stretch"
-            >
+        >
             <Grid HorizontalAlignment="Right">
-                <Button x:Name="addDeviceButton" Content="Add Device" Click="addDeviceButton_Click" Margin="{ThemeResource SmallLeftTopRightBottomMargin}" Background="{ThemeResource SystemAccentColor}"/>
-                <Button x:Name="cancelDeviceButton" Content="Cancel" Click="cancelDeviceButton_Click" Margin="{ThemeResource SmallLeftTopRightBottomMargin}"/>
+                <Button x:Name="addDeviceButton" Content="Add Device" Click="addDeviceButton_Click" Margin="{ThemeResource SmallLeftTopRightBottomMargin}" Style="{ThemeResource AccentButtonStyle}"/>
             </Grid>
-            
-            <Frame Name="Frame" Width="auto" Height="auto"></Frame>
         </StackPanel>
     </Grid>
 </Page>

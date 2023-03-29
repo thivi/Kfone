@@ -26,5 +26,10 @@ namespace Kfone.Views
             ViewModel.AddPromotion(promotion);
             this.Frame.Navigate(typeof(PromotionsPage));
         }
+
+        private void cancelButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(DevicesPage));
+        }
     }
 }

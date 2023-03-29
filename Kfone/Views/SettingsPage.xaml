@@ -71,6 +71,8 @@
                         Text="{x:Bind ViewModel.User.UserPrincipalName, Mode=OneWay}"
                         Margin="{StaticResource XSmallTopMargin}"
                         Style="{ThemeResource BodyTextBlockStyle}" />
+                    <TextBlock Text="{x:Bind ViewModel.User.Role, Mode=OneWay}"
+                        Style="{ThemeResource BodyTextBlockStyle}" />
                 </StackPanel>
             </StackPanel>
             <HyperlinkButton

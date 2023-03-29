@@ -20,7 +20,7 @@
         <DataTemplate x:Key="ItemTemplate" x:DataType="model:Promotion">
             <Grid Height="60">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="50" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Image

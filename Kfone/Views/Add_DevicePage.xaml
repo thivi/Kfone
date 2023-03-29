@@ -7,27 +7,43 @@
     x:Class="Kfone.Views.Add_DevicePage"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
-    <Grid x:Name="ContentArea" Margin="{ThemeResource LargeTopMargin}">
-        <StackPanel
-            Grid.Column="1"
-            Margin="{StaticResource SmallLeftMargin}"
-            VerticalAlignment="Stretch" >
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="68" Margin="{ThemeResource MediumTopMargin}"/>
-            <TextBox x:Name="Name" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" PlaceholderText="Enter a name" VerticalAlignment="Top" Width="206"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Price" VerticalAlignment="Top" Width="68" Margin="{ThemeResource MediumTopMargin}"/>
-            <TextBox x:Name="Price" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" PlaceholderText="Enter a price" VerticalAlignment="Top" Width="206"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Brand" VerticalAlignment="Top" Width="68" Margin="{ThemeResource MediumTopMargin}"/>
-            <TextBox x:Name="Brand" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" PlaceholderText="Enter a brand" VerticalAlignment="Top" Width="206"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Image" VerticalAlignment="Top" Width="68" Margin="{ThemeResource MediumTopMargin}"/>
-            <TextBox x:Name="ImageURL" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" PlaceholderText="Enter an image URL" VerticalAlignment="Top" Width="206"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Type" VerticalAlignment="Top" Width="68" Margin="{ThemeResource MediumTopMargin}"/>
-            <ComboBox x:Name="TypeComboBox" Width="206" PlaceholderText="Select a type" IsDropDownOpen="True"/>
-            <Button Content="Add Device" Click="Button_Click" Margin="{ThemeResource MediumTopMargin}" Background="{ThemeResource SystemAccentColor}"/>
+    <ScrollViewer
+        Name="ForegroundElement"
+        Padding="{ThemeResource DetailPageMargin}"
+        HorizontalAlignment="Stretch"
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+        VerticalScrollMode="Enabled"
+        IsTabStop="True">
+        <Grid x:Name="ContentArea">
+            <StackPanel
+                Grid.Column="1"
+                VerticalAlignment="Stretch"
+                Margin="{ThemeResource MediumBottomMargin}"
+             >
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="68"/>
+                <TextBox x:Name="Name" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" PlaceholderText="Enter a name" VerticalAlignment="Top" Width="206" Margin="{ThemeResource SmallTopMargin}"/>
 
-            <!--
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Price" VerticalAlignment="Top" Width="68" Margin="{ThemeResource MediumTopMargin}"/>
+                <TextBox x:Name="Price" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" PlaceholderText="Enter a price" VerticalAlignment="Top" Width="206" Margin="{ThemeResource SmallTopMargin}"/>
+
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Brand" VerticalAlignment="Top" Width="68" Margin="{ThemeResource MediumTopMargin}"/>
+                <TextBox x:Name="Brand" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" PlaceholderText="Enter a brand" VerticalAlignment="Top" Width="206" Margin="{ThemeResource SmallTopMargin}"/>
+
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Image" VerticalAlignment="Top" Width="68" Margin="{ThemeResource MediumTopMargin}"/>
+                <TextBox x:Name="ImageURL" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" PlaceholderText="Enter an image URL" VerticalAlignment="Top" Width="206" Margin="{ThemeResource SmallTopMargin}"/>
+
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Type" VerticalAlignment="Top" Width="68" Margin="{ThemeResource MediumTopMargin}"/>
+                <ComboBox x:Name="TypeComboBox" Width="206" PlaceholderText="Select a type" IsDropDownOpen="True" Margin="{ThemeResource SmallTopMargin}"/>
+
+                <StackPanel Orientation="Horizontal" Margin="{ThemeResource LargeTopMargin}" HorizontalAlignment="Right">
+                    <Button x:Name="cancelDeviceButton" Content="Cancel" Click="cancelButton_Click"/>
+                    <Button Content="Add Device" Margin="{ThemeResource MediumLeftMargin}" Click="Button_Click" Style="{ThemeResource AccentButtonStyle}"/>
+                </StackPanel>
+                <!--
                 The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
                 Place your content here.
             -->
-        </StackPanel>
-    </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Page>

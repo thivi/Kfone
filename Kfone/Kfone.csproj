@@ -412,10 +412,18 @@
     <Compile Include="Helpers\ResourceExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Blue-Transparent-Square.svg" />
+    <Content Include="Assets\Blue-Transparent.svg" />
+    <Content Include="Assets\Blue-White.svg" />
+    <Content Include="Assets\Blue.png" />
     <Content Include="Assets\DefaultIcon.png" />
-    <Content Include="Assets\kfone.png" />
     <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\Splash.png" />
     <Content Include="Assets\Square71x71Logo.scale-400.png" />
+    <Content Include="Assets\White-Blue.svg" />
+    <Content Include="Assets\White-Transparent-Square.svg" />
+    <Content Include="Assets\White-Transparent.svg" />
+    <Content Include="Assets\White.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

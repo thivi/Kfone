@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Kfone.Core.Helpers;
+using Kfone.Core.Models;
 using Kfone.Helpers;
 using Kfone.Services;
 

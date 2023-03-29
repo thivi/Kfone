@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Kfone.Core.Models;
 using Kfone.Helpers;
 
 using Microsoft.Toolkit.Mvvm.ComponentModel;
@@ -31,6 +31,8 @@ namespace Kfone.ViewModels
             get => _photo;
             set => SetProperty(ref _photo, value);
         }
+
+        public Roles Role { get; set; }
 
         public UserViewModel()
         {

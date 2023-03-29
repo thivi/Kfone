@@ -20,10 +20,10 @@
         <DataTemplate x:Key="ItemTemplate" x:DataType="model:Customer">
             <Grid Height="60">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="50" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Ellipse Width="64" Height="64">
+                <Ellipse Width="45" Height="45">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="{x:Bind profilePic, Mode=OneWay}" Stretch="UniformToFill" />
                     </Ellipse.Fill>

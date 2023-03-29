@@ -34,5 +34,9 @@ namespace Kfone.Views
             ViewModel.AddCustomer(customer);
             this.Frame.Navigate(typeof(CustomersPage));
         }
+        private void cancelButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(DevicesPage));
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -496,8 +497,20 @@ namespace Kfone.Core.Services
         public static async Task<IEnumerable<DataPoint>> GetChartDataAsync()
         {
             await Task.CompletedTask;
-            return AllOrders().Select(o => new DataPoint() { Category = o.Company, Value = o.OrderTotal })
-                                  .OrderBy(dp => dp.Category);
+            DataPoint[] data =
+            {
+                new DataPoint { Category = "2015", Value = 50000 },
+                new DataPoint { Category = "2016", Value = 60000 },
+                new DataPoint { Category = "2017", Value = 75000 },
+                new DataPoint { Category = "2017", Value = 125000 },
+                new DataPoint { Category = "2018", Value = 175000 },
+                new DataPoint { Category = "2019", Value = 275000 },
+                new DataPoint { Category = "2020", Value = 475000 },
+                new DataPoint { Category = "2021", Value = 575000 },
+                new DataPoint { Category = "2022", Value = 975000 },
+            };
+
+            return data;
         }
     }
 }

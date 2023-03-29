@@ -104,7 +104,8 @@ namespace Kfone.Services
             return new UserViewModel()
             {
                 Name = IdentityService.GetAccountUserName(),
-                Photo = IdentityService.GetUserProfilePic()
+                Photo = IdentityService.GetUserProfilePic(),
+                Role = IdentityService.GetUserRole()
             };
         }
     }

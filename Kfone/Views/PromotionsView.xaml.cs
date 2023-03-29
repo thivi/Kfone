@@ -27,21 +27,24 @@ namespace Kfone.Views
             this.InitializeComponent();
             Frame.Navigate(typeof(PromotionsPage));
             addPromotionButton.Visibility = Visibility.Visible;
-            cancelPromotionButton.Visibility = Visibility.Collapsed;
+            Frame.Navigated += (object sender, NavigationEventArgs e) => {
+                if (e.SourcePageType == typeof(DevicesPage))
+                {
+                    addPromotionButton.Visibility = Visibility.Visible;
+                }
+            };
         }
 
         private void addPromotionButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Add_PromotionPage));
             addPromotionButton.Visibility = Visibility.Collapsed;
-            cancelPromotionButton.Visibility = Visibility.Visible;
         }
 
         private void cancelPromotionButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(PromotionsPage));
             addPromotionButton.Visibility = Visibility.Visible;
-            cancelPromotionButton.Visibility = Visibility.Collapsed;
         }
     }
 }

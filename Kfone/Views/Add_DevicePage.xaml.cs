@@ -33,5 +33,10 @@ namespace Kfone.Views
 
             this.Frame.Navigate(typeof(DevicesPage));
         }
+
+        private void cancelButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(DevicesPage));
+        }
     }
 }

@@ -7,53 +7,68 @@
     xmlns:xaml="using:Windows.UI.Xaml"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
-    <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
-        <StackPanel
+    <ScrollViewer
+        Name="ForegroundElement"
+        Padding="{ThemeResource DetailPageMargin}"
+        HorizontalAlignment="Stretch"
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+        VerticalScrollMode="Enabled"
+        IsTabStop="True">
+        <Grid x:Name="ContentArea">
+            <StackPanel
             Grid.Column="1"
-            Margin="{StaticResource SmallLeftMargin}"
+            Margin="{ThemeResource MediumBottomMargin}"
             VerticalAlignment="Stretch" >
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
-            <TextBox x:Name="Name" HorizontalAlignment="Left" TextWrapping="Wrap" PlaceholderText="Enter a name" VerticalAlignment="Top" Width="206"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
-            <TextBox x:Name="Email" HorizontalAlignment="Left" TextWrapping="Wrap" PlaceholderText="Enter an email" VerticalAlignment="Top" Width="206"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Date of Birth" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
-            <CalendarDatePicker x:Name="dob"  VerticalAlignment="Top" Width="206"/>
-            <!--<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Contact No." VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+                <TextBox x:Name="Name" HorizontalAlignment="Left" TextWrapping="Wrap" PlaceholderText="Enter a name" VerticalAlignment="Top" Width="206" Margin="{ThemeResource SmallTopMargin}"/>
+
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+                <TextBox x:Name="Email" HorizontalAlignment="Left" TextWrapping="Wrap" PlaceholderText="Enter an email" VerticalAlignment="Top" Width="206" Margin="{ThemeResource SmallTopMargin}"/>
+
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Date of Birth" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+                <CalendarDatePicker x:Name="dob"  PlaceholderText="Select Date of Birth" VerticalAlignment="Top" Width="206" Margin="{ThemeResource SmallTopMargin}"/>
+                <!--<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Contact No." VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
             <TextBox x:Name="contactNo"  HorizontalAlignment="Left" TextWrapping="Wrap" PlaceholderText="Enter a contact no." VerticalAlignment="Top" Width="206"/>
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Address" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
             <TextBox x:Name="address" HorizontalAlignment="Left" TextWrapping="Wrap" PlaceholderText="Enter a address" VerticalAlignment="Top" Width="206"/>-->
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Profile Picture" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
-            <TextBox x:Name="profilePic" HorizontalAlignment="Left" TextWrapping="Wrap" PlaceholderText="Enter a profile picture url" VerticalAlignment="Top" Width="206"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Loyalty Tier" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
-            <StackPanel Orientation="Horizontal">
-                <RadioButton
-                x:Name="GoldTier"
-                GroupName="Tiers"
-                Content="Gold"
-                >
-                </RadioButton>
-                <RadioButton
-                    x:Name="SilverTier"
-                    GroupName="Tiers"
-                     Content="Silver">
-                </RadioButton>
-                <RadioButton
-                    x:Name="PlatinumTier"
-                    GroupName="Tiers"
-                    Content="Platinum">
-                </RadioButton>
-                <RadioButton
-                    x:Name="NoneTier"
-                    FontSize="15"
-                    GroupName="Tiers"
-                    Content="None">
-                </RadioButton>
-            </StackPanel>
-            <Button Content="Add Customer" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}" Click="Button_Click" Background="{ThemeResource SystemAccentColor}"/>
-            <!--
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Profile Picture" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+                <TextBox x:Name="profilePic" HorizontalAlignment="Left" TextWrapping="Wrap" PlaceholderText="Enter a profile picture url" VerticalAlignment="Top" Width="206" Margin="{ThemeResource SmallTopMargin}"/>
+
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Loyalty Tier" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+                <StackPanel Orientation="Vertical" Margin="{ThemeResource SmallTopMargin}">
+                    <RadioButton
+                        x:Name="GoldTier"
+                        GroupName="Tiers"
+                        Content="Gold"
+                    >
+                    </RadioButton>
+                    <RadioButton
+                        x:Name="SilverTier"
+                        GroupName="Tiers"
+                        Content="Silver">
+                    </RadioButton>
+                    <RadioButton
+                        x:Name="PlatinumTier"
+                        GroupName="Tiers"
+                        Content="Platinum">
+                    </RadioButton>
+                    <RadioButton
+                        x:Name="NoneTier"
+                        FontSize="15"
+                        GroupName="Tiers"
+                        Content="None">
+                    </RadioButton>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="{ThemeResource LargeTopMargin}" HorizontalAlignment="Right">
+                    <Button x:Name="cancelDeviceButton" Content="Cancel" Click="cancelButton_Click"/>
+                    <Button Content="Add Customer" Margin="{ThemeResource MediumLeftMargin}" Click="Button_Click" Style="{ThemeResource AccentButtonStyle}"/>
+                </StackPanel>
+                <!--
                 The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
                 Place your content here.
             -->
-        </StackPanel>
-    </Grid>
+            </StackPanel>
+        </Grid>
+        </ScrollViewer>
 </Page>
