@@ -19,13 +19,13 @@ namespace Kfone.Services
     public class IdentityMgtService
     {
 
-        private readonly string _clientId = "VtanVLzeigsM9ttB5MxE2NseVM0a";
-        private readonly string _clientSecrect = "kk9sZqddhr4_WxRFpTWdaXZ3p_oa";
+        private readonly string _clientId = "lp79hGwq602Hx7jjhDuTlv08EOMa";
+        private readonly string _clientSecrect = "MfyTzRqPhHROq4MIQ2l67rs_woMa";
 
         private string _access_token;
         private DateTime _expire_time;
 
-        private async void InitializeWithClientCredentials()
+        public async void InitializeWithClientCredentials()
         {
             using (HttpClient client = new HttpClient())
             {

@@ -28,9 +28,9 @@ namespace Kfone.Views
                 tier = Tiers.Platinum;
             } else
             {
-                tier = Tiers.None;
+                tier = Tiers.Default;
             }
-            Customer customer = new Customer { name = Name.Text, address = address.Text, contactNo = contactNo.Text, dob = DateTime.Parse(dob.Date.ToString()), profilePic = profilePic.Text, tier = tier };
+            Customer customer = new Customer { email=Email.Text, name = Name.Text, address = address.Text, contactNo = contactNo.Text, dob = (DateTimeOffset)dob.Date, profilePic = profilePic.Text, tier = tier };
             ViewModel.AddCustomer(customer);
             this.Frame.Navigate(typeof(CustomersPage));
         }

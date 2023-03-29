@@ -14,7 +14,9 @@
             VerticalAlignment="Stretch" >
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
                 <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="Enter a name" VerticalAlignment="Top" Width="206"/>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Date of Birth" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
+            <TextBox x:Name="Email" HorizontalAlignment="Left" TextWrapping="Wrap" PlaceholderText="Enter an email" VerticalAlignment="Top" Width="206"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Date of Birth" VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
                 <CalendarDatePicker VerticalAlignment="Top" Width="206"/>
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Contact No." VerticalAlignment="Top" Margin="{ThemeResource MediumTopMargin}"/>
                 <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="Enter a contact no." VerticalAlignment="Top" Width="206"/>

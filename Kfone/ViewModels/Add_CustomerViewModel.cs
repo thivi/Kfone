@@ -1,6 +1,6 @@
 ﻿using System;
 using Kfone.Core.Models;
-using Kfone.Core.Services;
+using Kfone.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace Kfone.ViewModels
@@ -11,9 +11,9 @@ namespace Kfone.ViewModels
         {
         }
 
-        public void AddCustomer(Customer customer)
+        public async void AddCustomer(Customer customer)
         {
-            CustomerService.SetCustomer(customer);
+            await CustomerService.AddCustomer(customer);
         }
     }
 }

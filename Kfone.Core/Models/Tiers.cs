@@ -9,6 +9,6 @@ namespace Kfone.Core.Models
         Gold,
         Silver,
         Platinum,
-        None
+        Default
     }
 }

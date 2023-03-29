@@ -33,7 +33,7 @@
                     Margin="{StaticResource SmallLeftMargin}"
                     VerticalAlignment="Center">
                     <TextBlock Style="{ThemeResource ListTitleStyle}" Text="{x:Bind name}" />
-                    <TextBlock Style="{StaticResource ListSubTitleStyle}" Text="{x:Bind contactNo}" />
+                    <TextBlock Style="{StaticResource ListSubTitleStyle}" Text="{x:Bind email}" />
                 </StackPanel>
             </Grid>
         </DataTemplate>

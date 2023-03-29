@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Kfone.Core.Models;
-using Kfone.Core.Services;
+using Kfone.Services;
 
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Uwp.UI.Controls;
@@ -31,7 +31,7 @@ namespace Kfone.ViewModels
         {
             SampleItems.Clear();
 
-            var data = CustomerService.GetCustomers();
+            var data = await CustomerService.GetUsers();
 
             foreach (var item in data)
             {

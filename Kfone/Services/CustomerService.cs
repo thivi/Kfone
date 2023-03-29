@@ -11,15 +11,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.System;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Kfone.Services
 {
-    public static class StaffService
+    public static class CustomerService
     {
-        public static List<Staff> staffs = new List<Staff>(new Staff[]
-        {
-            new Staff{name="John Doe", address="20, PG, Colombo-03", contactno="74373876847", dob=DateTime.Parse("03/03/1995"), joinedDate=DateTime.Parse("03/29/2023"), profilePic="https://th.bing.com/th/id/R.569493641bff31b6ee9a484586487b10?rik=KsmvdhoyrlKC7g&pid=ImgRaw&r=0", roles=Roles.Marketing}
-        });
+        public static List<Customer> customers = new List<Customer>();
 
         public static IDictionary<Roles, string> groupRoleMapping = new Dictionary<Roles, string>() {
             { Roles.AdminG, "groupId" },
@@ -28,32 +26,26 @@ namespace Kfone.Services
             { Roles.Customer, "groupId" },
         };
 
-        private static IdentityService _identityService => Singleton<IdentityService>.Instance;
+        private static IdentityMgtService _managementService => Singleton<IdentityMgtService>.Instance;
 
-        public static List<Staff> GetStaffs()
+        public static void SetCustomer(Customer staff)
         {
-            return staffs;
+            customers.Add(staff);
         }
 
-        public static void SetStaff(Staff staff)
+        public static void DeleteCustomer(Customer staff)
         {
-            staffs.Add(staff);
+            customers.Remove(staff);
         }
 
-        public static void DeleteStaff(Staff staff)
+        public static async Task AddCustomer(Customer staff)
         {
-            staffs.Remove(staff);
-        }
-
-        private static async Task AddStaffUser(Staff staff)
-        {
-
             string url = "https://api.asgardeo.io/t/kfoneteam2/scim2/Users";
             string[] scopes = { "internal_user_mgt_create" };
-            string access_token = await _identityService.GetAccessTokenAsync(scopes);
+            string access_token = _managementService.GetAccessToken();
 
-            string email = "shshi@gmail.com";
-            string tier = "gold";
+            string email = staff.email;
+            string tier = staff.tier.ToString();
 
             string json = $@"{{
                     ""schemas"": [],
@@ -68,11 +60,11 @@ namespace Kfone.Services
                             ""primary"": true
                         }}
                     ],
-                    ""tier"": ""{tier}"",
                     ""dob"" : ""{staff.dob}"",
-                    ""photourl"": ""{staff.profilePic}"",
+                    ""profileUrl"": ""{staff.profilePic}"",
                     ""urn:scim:wso2:schema"": {{
-                        ""askPassword"": true
+                        ""askPassword"": true,
+                        ""tier"": ""{tier.ToString()}""
                     }}
                 }}
             ";
@@ -91,7 +83,7 @@ namespace Kfone.Services
                     dynamic jsonObj = JsonConvert.DeserializeObject<dynamic>(responseBody);
                     string userId = jsonObj.id;
                     string username = jsonObj.userName;
-                    await AddUserToGroup(username, userId, groupRoleMapping[staff.roles]);
+                    //await AddUserToGroup(username, userId, groupRoleMapping[staff.roles]);
                 }
 
             }
@@ -102,7 +94,7 @@ namespace Kfone.Services
 
             string url = $"https://api.asgardeo.io/t/kfoneteam2/scim2/Groups/{groupId}";
             string[] scopes = { "internal_group_mgt_update" };
-            string access_token = await _identityService.GetAccessTokenAsync(scopes);
+            string access_token = _managementService.GetAccessToken();
 
             var patchRequest = new
             {
@@ -153,7 +145,7 @@ namespace Kfone.Services
 
             string url = $"https://api.asgardeo.io/t/kfoneteam2/scim2/Users/{userID}";
             string[] scopes = { "internal_user_mgt_delete" };
-            string access_token = await _identityService.GetAccessTokenAsync(scopes);
+            string access_token = _managementService.GetAccessToken();
 
 
             using (HttpClient client = new HttpClient())
@@ -175,12 +167,29 @@ namespace Kfone.Services
             }
         }
 
-        private static async Task GetAllUser()
+        private static Tiers GetTier(string tier)
+        {
+            switch (tier)
+            {
+                case "Gold":
+                    return Tiers.Gold;
+                case "Silver":
+                    return Tiers.Silver;
+                case "Platinum":
+                    return Tiers.Platinum;
+                default:
+                    return Tiers.Default;
+            }
+        }
+
+        public static async Task<List<Customer>> GetUsers()
         {
 
             string url = $"https://api.asgardeo.io/t/kfoneteam2/scim2/Users?domain=DEFAULT";
             string[] scopes = { "internal_user_mgt_list" };
-            string access_token = await _identityService.GetAccessTokenAsync(scopes);
+            string access_token = _managementService.GetAccessToken();
+
+            Tiers tier;
 
 
             using (HttpClient client = new HttpClient())
@@ -190,24 +199,55 @@ namespace Kfone.Services
 
 
                 HttpResponseMessage response = await client.GetAsync(url);
-                if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
+                    customers.Clear();
                     string responseBody = await response.Content.ReadAsStringAsync();
                     dynamic jsonObj = JsonConvert.DeserializeObject<dynamic>(responseBody);
 
                     dynamic resources = jsonObj.Resources;
                     var sb = new StringBuilder(128);
-                    IDictionary<string, string> users = new Dictionary<string, string>();
-
-                    foreach (dynamic item in resources)
+                    try
                     {
-                        string userName = item.userName;
-                        string userId = item.id;
-                        users.Add(userId, userName);
-                    }
-                }
+                        foreach (dynamic item in resources)
+                        {
+                            var group = item?.groups?[0]?.display;
 
+                            if (group != "DEFAULT/ApplicationAdmin" && group != "DEFAULT/SalesRep" && group != "DEFAULT/MarketingLead")
+                            {
+                                string userName = item.userName;
+                                string userId = item.id;
+                                string name = item?.name?.givenName;
+                                string email = item?.emails?[0];
+                                string profileUrl = item?.profileUrl;
+                                string tierString = item?["urn:scim:wso2:schema"]?.tier ?? "";
+                                tier = GetTier(tierString);
+                                DateTimeOffset dob = item?.dob != null ? DateTimeOffset.Parse(item?.dob) : DateTimeOffset.MinValue;
+                                customers.Add(new Customer
+                                {
+                                    name = name,
+                                    email = email,
+                                    tier = tier,
+                                    dob = dob,
+                                    profilePic = profileUrl ?? "https://cdn3.iconfinder.com/data/icons/web-design-and-development-2-6/512/87-1024.png",
+                                    address = "20, PG, Colombo-03",
+                                    contactNo = "063542635387"
+                                });
+                            }
+
+                        }
+
+                        return customers;
+                    }
+                    catch (Exception)
+                    {
+                        return customers;
+                    }
+
+                }
             }
+
+            return customers;
         }
     }
 }

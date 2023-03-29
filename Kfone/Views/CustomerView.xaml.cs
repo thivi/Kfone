@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kfone.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,7 +27,13 @@ namespace Kfone.Views
         {
             this.InitializeComponent();
             Frame.Navigate(typeof(CustomersPage));
-            addCustomerButton.Visibility = Visibility.Visible;
+            if (new AccessControl().ShouldShowGranular("create_customers"))
+            {
+                addCustomerButton.Visibility = Visibility.Visible;
+            } else
+            {
+                addCustomerButton.Visibility = Visibility.Collapsed;
+            }
             cancelCustomerButton.Visibility = Visibility.Collapsed;
         }
 

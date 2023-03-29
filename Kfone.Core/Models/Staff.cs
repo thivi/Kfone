@@ -11,7 +11,8 @@ namespace Kfone.Core.Models
         public string address { get; set; }
         public Roles roles { get; set; }
         public string profilePic { get; set; }
-        public DateTime joinedDate { get; set; }
-        public DateTime dob { get; set; }
+        public DateTimeOffset joinedDate { get; set; }
+        public DateTimeOffset dob { get; set; }
+        public string email { get; set; }
     }
 }

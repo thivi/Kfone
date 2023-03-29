@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="/Styles/TextBlock.xaml" />
                 <ResourceDictionary Source="/Styles/Page.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <Color x:Key="SystemAccentColor">#d0021b</Color>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

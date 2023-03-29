@@ -36,6 +36,7 @@ namespace Kfone.Services
         public event EventHandler LoggedIn;
 
         public event EventHandler LoggedOut;
+        private static IdentityMgtService managementService => Singleton<IdentityMgtService>.Instance;
 
         public void InitializeWithAadAndPersonalMsAccounts()
         {
@@ -44,8 +45,8 @@ namespace Kfone.Services
             var options = new OidcClientOptions
             {
                 Authority = "https://api.asgardeo.io/t/kfoneteam2/oauth2/token",
-                ClientId = "lp79hGwq602Hx7jjhDuTlv08EOMa",
-                ClientSecret = "MfyTzRqPhHROq4MIQ2l67rs_woMa",
+                ClientId = "KBoSoK_fskR6p1mM0WtqHX06nqUa",
+                ClientSecret = "xu7Y9Xu2RT6U4ClI95ud7BiN2aka",
                 Scope = "openid profile groups",
                 RedirectUri = "kfone://callback",
                 Browser = new SystemBrowser(),
@@ -66,6 +67,7 @@ namespace Kfone.Services
 
 
             _client = new OidcClient(options);
+
         }
 
         public bool IsLoggedIn() => _authenticationResult != null;
@@ -80,6 +82,7 @@ namespace Kfone.Services
             try
             {
                 _authenticationResult = await _client.LoginAsync(new LoginRequest());
+                managementService.InitializeWithClientCredentials();
 
                 if (!IsAuthorized())
                 {
@@ -113,7 +116,7 @@ namespace Kfone.Services
         {
             try
             {
-                return _authenticationResult.User.Claims?.Where(claim => claim.Type == "profileUrl")?.ToList()?[0]?.Value;
+                return _authenticationResult.User.Claims?.Where(claim => claim.Type == "profile")?.ToList()?[0]?.Value;
             }
             catch (Exception)
             {
@@ -196,6 +199,7 @@ namespace Kfone.Services
             try
             {
                 _authenticationResult = await _client.LoginAsync(new LoginRequest());
+                managementService.InitializeWithClientCredentials();
 
                 if (this.IsAuthorized())
                 {
