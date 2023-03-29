@@ -158,6 +158,12 @@ namespace Kfone.Services
         {
             try
             {
+                var logoutRequest = new LogoutRequest
+                {
+                    IdTokenHint = _authenticationResult.IdentityToken,
+                    BrowserDisplayMode = IdentityModel.OidcClient.Browser.DisplayMode.Hidden
+                };
+                await _client.LogoutAsync(logoutRequest);
                 _authenticationResult = null;
                 LoggedOut?.Invoke(this, EventArgs.Empty);
             }
