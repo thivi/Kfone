@@ -1,4 +1,4 @@
-# Kfone Admin Application using .NET
+# Kfone Admin UWP Application using .NET
 
 Kfone, a telecommunication service that offers telecom and digital products to customers. 
 The admin portal has been built for Kfone staff to add devices and services for sale and make seasonal updates to available items. 
@@ -9,6 +9,57 @@ The staff is divided into three categories:
   * Sales Representative can add promo codes, assign them to items, and decide if an item is ready for sale. 
 * Marketing Lead
   * Marketing Lead can view the dashboard to see user activities. 
+  
+### Integrate Authentication in the application using Asgardeo
+
+This application makes use of the https://github.com/IdentityModel/IdentityModel.OidcClient library to achieve browser based authentication integration.
+IdentityModel library is an officially certified OpenId Connect client library.
+
+To integrate Asgardeo login into the application, instantiate an instance of the IdentityModel.OidcClient class, configuring the Asgardeo application details:
+
+```
+     var options = new OidcClientOptions
+     {
+         Authority = "https://api.asgardeo.io/t/asgardeo/oauth2/token",
+         ClientId = <ClientID>,
+         ClientSecret = <ClientSecret>,
+         Scope = <Scopes>,
+         RedirectUri = <RedirectURL>,
+         Browser = new SystemBrowser(),
+         Policy = new Policy
+         {
+             Discovery = new IdentityModel.Client.DiscoveryPolicy
+             {
+                 AdditionalEndpointBaseAddresses =
+                 {
+                     "https://api.asgardeo.io/t/asgardeo/oauth2",
+                     "https://api.asgardeo.io/t/asgardeo/oauth2/token",
+                     "https://api.asgardeo.io/t/asgardeo/oidc",
+                     "https://api.asgardeo.io/t/asgardeo"
+                 }
+             }
+         }
+     };
+
+     var client = new OidcClient(options);
+
+```
+> To ensure proper functioning, it may be necessary for you to manually define the base addresses, as the SDK may be experiencing issues.
+
+We call the LoginAsync method to log the user in:
+
+```
+private LoginResult _authenticationResult; = await _client.LoginAsync(new LoginRequest());
+```
+This will load the Asgardeo login page into a web view. (By defining SystemBrowser in the OidcClientOptions, the Asgardeo login page will be displayed using the default system browser)
+
+The returned login result will indicate whether authentication was successful, and if so contain the tokens and claims of the user.
+
+We call theLogoutAsync method to logout the user:
+
+```
+await _client.LogoutAsync(new LogoutRequest());
+```
 
 ### Access Control
 
@@ -48,4 +99,6 @@ var onLoginRequest = function(context) {
 
 MFA has been implemented for staff members, using multi-options for basic authentication and magic link for step one, and TOTP for step two. 
 Backup codes can only be used by the administrator. 
+
+
 
