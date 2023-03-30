@@ -14,14 +14,14 @@
         HorizontalAlignment="Stretch"
         VerticalScrollMode="Enabled"
         IsTabStop="True">
-        
+
         <Grid>
             <StackPanel HorizontalAlignment="Left">
-                    <Image
-                  Source="{x:Bind ListMenuItem.image}"
+                <Image
+                  Source="{x:Bind ListMenuItem.image, Mode=OneWay}"
                   Width="200"
                   VerticalAlignment="Center"
-                />
+               />
                 <TextBlock
                     VerticalAlignment="Center"
                     Text="{x:Bind ListMenuItem.name, Mode=OneWay}"
