@@ -34,23 +34,19 @@ namespace Kfone.Services
             IdentityService.LoggedOut += OnLoggedOut;
         }
 
-        public async Task<UserViewModel> GetUserAsync()
+        public UserViewModel GetUser()
         {
             if (_user == null)
             {
-                _user = await GetUserFromCacheAsync();
-                if (_user == null)
-                {
-                    _user = GetDefaultUserData();
-                }
+                _user = GetDefaultUserData();
             }
 
             return _user;
         }
 
-        private async void OnLoggedIn(object sender, EventArgs e)
+        private void OnLoggedIn(object sender, EventArgs e)
         {
-            _user = await GetUserFromGraphApiAsync();
+            _user = GetDefaultUserData();
             UserDataUpdated?.Invoke(this, _user);
         }
 
@@ -58,45 +54,6 @@ namespace Kfone.Services
         {
             _user = null;
             await ApplicationData.Current.LocalFolder.SaveAsync<User>(_userSettingsKey, null);
-        }
-
-        private async Task<UserViewModel> GetUserFromCacheAsync()
-        {
-            var cacheData = await ApplicationData.Current.LocalFolder.ReadAsync<User>(_userSettingsKey);
-            return await GetUserViewModelFromData(cacheData);
-        }
-
-        private async Task<UserViewModel> GetUserFromGraphApiAsync()
-        {
-            var accessToken = await IdentityService.GetAccessTokenForGraphAsync();
-            if (string.IsNullOrEmpty(accessToken))
-            {
-                return null;
-            }
-
-            var userData = await MicrosoftGraphService.GetUserInfoAsync(accessToken);
-            if (userData != null)
-            {
-                userData.Photo = await MicrosoftGraphService.GetUserPhoto(accessToken);
-                await ApplicationData.Current.LocalFolder.SaveAsync(_userSettingsKey, userData);
-            }
-
-            return await GetUserViewModelFromData(userData);
-        }
-
-        private async Task<UserViewModel> GetUserViewModelFromData(User userData)
-        {
-            if (userData == null)
-            {
-                return null;
-            }
-
-            return new UserViewModel()
-            {
-                Name = userData.DisplayName,
-                UserPrincipalName = userData.UserPrincipalName,
-                Photo = "https://cdn3.iconfinder.com/data/icons/web-design-and-development-2-6/512/87-1024.png"
-            };
         }
 
         private UserViewModel GetDefaultUserData()

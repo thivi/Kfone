@@ -34,7 +34,7 @@ namespace Kfone.Services
             IdentityService.LoggedIn += OnLoggedIn;
         }
 
-        public async Task ActivateAsync(object activationArgs)
+        public async Task ActivateAsync(object activationArgs, bool isOnActivation)
         {
             if (IsInteractive(activationArgs))
             {
@@ -42,11 +42,14 @@ namespace Kfone.Services
                 // take into account that the splash screen is shown while this code runs.
                 await InitializeAsync();
                 UserDataService.Initialize();
-                IdentityService.InitializeWithAadAndPersonalMsAccounts();
-                var silentLoginSuccess = await IdentityService.AcquireTokenSilentAsync();
-                if (!silentLoginSuccess || !IdentityService.IsAuthorized())
+                if (!isOnActivation)
                 {
-                    await RedirectLoginPageAsync();
+                    IdentityService.InitializeIdentityClient();
+                    LoginResultType loginSuccess = await IdentityService.LoginAsync();
+                    if (loginSuccess != LoginResultType.Success || !IdentityService.IsAuthorized())
+                    {
+                        await RedirectLoginPageAsync();
+                    }
                 }
 
                 // Do not repeat app initialization when the Window already has content,

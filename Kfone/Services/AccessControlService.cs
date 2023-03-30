@@ -9,13 +9,13 @@ using Windows.UI.Xaml.Controls;
 
 namespace Kfone.Services
 {
-    public class AccessControl
+    public class AccessControlService
     {
         private IdentityService _identityService => Singleton<IdentityService>.Instance;
         private Dictionary<string, Roles[]> _pageAccess = new Dictionary<string, Roles[]>();
         private Dictionary<string, Roles[]> _granularAccess = new Dictionary<string, Roles[]>();
       
-        public AccessControl() {
+        public AccessControlService() {
             Roles[] all = { Roles.SalesRep, Roles.AdminG, Roles.Marketing };
             Roles[] adminOnly = { Roles.AdminG };
             Roles[] adminSales = { Roles.AdminG, Roles.SalesRep };

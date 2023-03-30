@@ -76,12 +76,12 @@ namespace Kfone.ViewModels
         {
         }
 
-        public async Task InitializeAsync()
+        public void Initialize()
         {
             VersionDescription = GetVersionDescription();
             IdentityService.LoggedOut += OnLoggedOut;
             UserDataService.UserDataUpdated += OnUserDataUpdated;
-            User = await UserDataService.GetUserAsync();
+            User = UserDataService.GetUser();
         }
 
         private string GetVersionDescription()

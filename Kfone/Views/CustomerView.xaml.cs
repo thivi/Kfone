@@ -27,7 +27,7 @@ namespace Kfone.Views
         {
             this.InitializeComponent();
             Frame.Navigate(typeof(CustomersPage));
-            if (new AccessControl().ShouldShowGranular("create_customers"))
+            if (new AccessControlService().ShouldShowGranular("create_customers"))
             {
                 addCustomerButton.Visibility = Visibility.Visible;
             } else

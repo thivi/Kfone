@@ -17,9 +17,9 @@ namespace Kfone.Views
             InitializeComponent();
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            await ViewModel.InitializeAsync();
+            ViewModel.Initialize();
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)

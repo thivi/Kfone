@@ -17,7 +17,7 @@ namespace Kfone.Views
             InitializeComponent();
             DataContext = ViewModel;
             ViewModel.Initialize(shellFrame, navigationView, KeyboardAccelerators);
-            AccessControl accessControl = new AccessControl();
+            AccessControlService accessControl = new AccessControlService();
             using (IEnumerator<object> menuItems = (IEnumerator<object>)navigationView.MenuItems.GetEnumerator())
             {
                 while (menuItems.MoveNext())

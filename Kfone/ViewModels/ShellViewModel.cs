@@ -80,13 +80,13 @@ namespace Kfone.ViewModels
             UserDataService.UserDataUpdated += OnUserDataUpdated;
         }
 
-        private async void OnLoaded()
+        private void OnLoaded()
         {
             // Keyboard accelerators are added here to avoid showing 'Alt + left' tooltip on the page.
             // More info on tracking issue https://github.com/Microsoft/microsoft-ui-xaml/issues/8
             _keyboardAccelerators.Add(_altLeftKeyboardAccelerator);
             _keyboardAccelerators.Add(_backKeyboardAccelerator);
-            User = await UserDataService.GetUserAsync();
+            User = UserDataService.GetUser();
         }
 
         private void OnUserDataUpdated(object sender, UserViewModel userData)

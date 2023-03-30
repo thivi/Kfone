@@ -160,14 +160,14 @@
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\NavHelper.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
-    <Compile Include="Services\AccessControl.cs" />
+    <Compile Include="Services\AccessControlService.cs" />
     <Compile Include="Services\ActivationService.cs" />
     <Compile Include="Activation\DefaultActivationHandler.cs" />
     <Compile Include="Services\IdentityMgtService.cs" />
     <Compile Include="Services\IdentityService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\CustomerService.cs" />
-    <Compile Include="Services\SystemBrowser.cs" />
+    <Compile Include="Helpers\WebView.cs" />
     <Compile Include="Services\ThemeSelectorService.cs" />
     <Compile Include="Services\UserDataService.cs" />
     <Compile Include="ViewModels\Add_CustomerViewModel.cs" />
@@ -416,6 +416,7 @@
     <Content Include="Assets\Blue-Transparent.svg" />
     <Content Include="Assets\Blue-White.svg" />
     <Content Include="Assets\Blue.png" />
+    <Content Include="Assets\Blue_trans.png" />
     <Content Include="Assets\DefaultIcon.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\Splash.png" />

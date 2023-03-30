@@ -294,7 +294,7 @@
     <comment>Shell UserInfo button tooltip property</comment>
   </data>
   <data name="LogInPageTitle.Text" xml:space="preserve">
-    <value>Log in to access the Kfone admin app</value>
+    <value>Sign in to continue</value>
     <comment>Title for LogIn page</comment>
   </data>
   <data name="LogInButton.Content" xml:space="preserve">

@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
-using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using IdentityModel.Client;
@@ -9,30 +9,12 @@ using IdentityModel.OidcClient;
 
 using Kfone.Core.Helpers;
 using Kfone.Core.Models;
-using Windows.ApplicationModel.Core;
-using Windows.Media.Protection.PlayReady;
 using Windows.UI.Xaml;
 
 namespace Kfone.Services
 {
     public class IdentityService
     {
-        // For more information about using Identity, see
-        // https://github.com/microsoft/TemplateStudio/blob/main/docs/UWP/services/identity.md
-        //
-        // Read more about Microsoft Identity Client here
-        // https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/wiki
-        // https://docs.microsoft.com/azure/active-directory/develop/v2-overview
-
-        // TODO: Please create a ClientID following these steps and update the app.config IdentityClientId.
-        // https://docs.microsoft.com/azure/active-directory/develop/quickstart-register-app
-        private readonly string _clientId = ConfigurationManager.AppSettings["IdentityClientId"];
-
-        private readonly string _redirectUri = "https://login.microsoftonline.com/common/oauth2/nativeclient";
-
-        private readonly string[] _graphScopes = new string[] { "user.read" };
-
-        private bool _integratedAuthAvailable;
         private OidcClient _client;
         private LoginResult _authenticationResult;
         public event EventHandler LoggedIn;
@@ -40,36 +22,33 @@ namespace Kfone.Services
         public event EventHandler LoggedOut;
         private static IdentityMgtService managementService => Singleton<IdentityMgtService>.Instance;
 
-        public void InitializeWithAadAndPersonalMsAccounts()
+        public void InitializeIdentityClient()
         {
-            _integratedAuthAvailable = false;
-
             var options = new OidcClientOptions
             {
-                Authority = "https://api.asgardeo.io/t/kfoneteam2/oauth2/token",
-                ClientId = "KBoSoK_fskR6p1mM0WtqHX06nqUa",
-                ClientSecret = "xu7Y9Xu2RT6U4ClI95ud7BiN2aka",
+                Authority = $"https://api.asgardeo.io/t/{ConfigurationManager.AppSettings["Tenant"]}/oauth2/token",
+                ClientId = ConfigurationManager.AppSettings["ClientId"],
+                ClientSecret = ConfigurationManager.AppSettings["ClientSecret"],
                 Scope = "openid profile groups",
-                RedirectUri = "kfone://callback",
-                Browser = new SystemBrowser(),
+                RedirectUri = ConfigurationManager.AppSettings["RedirectURI"],
+                PostLogoutRedirectUri = ConfigurationManager.AppSettings["RedirectURI"],
+                Browser = new WebView(),
                 Policy = new Policy
                 {
-                    Discovery = new IdentityModel.Client.DiscoveryPolicy
+                    Discovery = new DiscoveryPolicy
                     {
                         AdditionalEndpointBaseAddresses =
                         {
-                            "https://api.asgardeo.io/t/kfoneteam2/oauth2",
-                            "https://api.asgardeo.io/t/kfoneteam2/oauth2/token",
-                            "https://api.asgardeo.io/t/kfoneteam2/oidc",
-                            "https://api.asgardeo.io/t/kfoneteam2"
+                            $"https://api.asgardeo.io/t/{ConfigurationManager.AppSettings["Tenant"]}/oauth2",
+                            $"https://api.asgardeo.io/t/{ConfigurationManager.AppSettings["Tenant"]}/oauth2/token",
+                            $"https://api.asgardeo.io/t/{ConfigurationManager.AppSettings["Tenant"]}/oidc",
+                            $"https://api.asgardeo.io/t/{ConfigurationManager.AppSettings["Tenant"]}"
                         }
                     }
                 }
             };
 
-
             _client = new OidcClient(options);
-
         }
 
         public bool IsLoggedIn() => _authenticationResult != null;
@@ -93,6 +72,7 @@ namespace Kfone.Services
                 }
 
                 LoggedIn?.Invoke(this, EventArgs.Empty);
+
                 return LoginResultType.Success;
             }
             catch (Exception)
@@ -105,20 +85,20 @@ namespace Kfone.Services
         {
             // TODO: You can also add extra authorization checks here.
             // i.e.: Checks permisions of _authenticationResult.Account.Username in a database.
-              return this._authenticationResult != null;
+            return this._authenticationResult != null;
         }
 
         public string GetAccountUserName()
         {
 
-            return _authenticationResult.User.Claims.Where(claim => claim.Type == "given_name").ToList()[0].Value;
+            return _authenticationResult?.User.Claims.Where(claim => claim.Type == "given_name").ToList()[0].Value;
         }
 
         public string GetUserProfilePic()
         {
             try
             {
-                return _authenticationResult.User.Claims?.Where(claim => claim.Type == "profile")?.ToList()?[0]?.Value;
+                return _authenticationResult?.User.Claims?.Where(claim => claim.Type == "profile")?.ToList()?[0]?.Value;
             }
             catch (Exception)
             {
@@ -132,7 +112,7 @@ namespace Kfone.Services
             const string adminG = "ApplicationAdmin";
             const string salesG = "SalesRep";
             const string marketingG = "MarketingLead";
-            string groupName = _authenticationResult.User.Claims.Where(claim => claim.Type == "groups").ToList()[0].Value;
+            string groupName = _authenticationResult?.User?.Claims?.Where(claim => claim.Type == "groups").ToList()[0].Value;
 
             switch (groupName)
             {
@@ -165,10 +145,13 @@ namespace Kfone.Services
                     IdTokenHint = _authenticationResult.IdentityToken,
                     BrowserDisplayMode = IdentityModel.OidcClient.Browser.DisplayMode.Hidden
                 };
-                await _client.LogoutAsync(logoutRequest);
-                _authenticationResult = null;
-                LoggedOut?.Invoke(this, EventArgs.Empty);
-                Application.Current.Exit();
+                LogoutResult result = await _client.LogoutAsync(logoutRequest);
+                NameValueCollection queryDict = System.Web.HttpUtility.ParseQueryString(new Uri(result.Response.ToString()).Query.ToString());
+                if(queryDict.Get("error") == null)
+                {
+                    _authenticationResult = null;
+                    LoggedOut?.Invoke(this, EventArgs.Empty);
+                }
             }
             catch (Exception)
             {
@@ -178,53 +161,9 @@ namespace Kfone.Services
             }
         }
 
-        public async Task<string> GetAccessTokenForGraphAsync() => await GetAccessTokenAsync(_graphScopes);
-
-        public async Task<string> GetAccessTokenAsync(string[] scopes)
+        public string GetAccessToken()
         {
-            var acquireTokenSuccess = await AcquireTokenSilentAsync(scopes);
-            if (acquireTokenSuccess)
-            {
-                return _authenticationResult.AccessToken;
-            }
-            else
-            { 
-                    // AcquireTokenSilent and AcquireTokenInteractive failed, the session will be closed.
-                    _authenticationResult = null;
-                    LoggedOut?.Invoke(this, EventArgs.Empty);
-                    return string.Empty;
-            }
-        }
-
-        public async Task<bool> AcquireTokenSilentAsync() => await AcquireTokenSilentAsync(_graphScopes);
-
-        private async Task<bool> AcquireTokenSilentAsync(string[] scopes)
-        {
-            if (!NetworkInterface.GetIsNetworkAvailable())
-            {
-                return false;
-            }
-
-            try
-            {
-                _authenticationResult = await _client.LoginAsync(new LoginRequest());
-                managementService.InitializeWithClientCredentials();
-
-                if (this.IsAuthorized())
-                {
-                    return true;
-                } else
-                {
-                    return false;
-                }
-            }
-            catch (Exception)
-            {
-                // TODO: Silentauth failed, please handle this exception as appropriate to your scenario
-                // For more info on MsalExceptions see
-                // https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/wiki/exceptions
-                return false;
-            }
+            return _authenticationResult.AccessToken;
         }
     }
 }

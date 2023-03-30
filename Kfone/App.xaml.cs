@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Configuration;
 using Kfone.Core.Helpers;
 using Kfone.Services;
 
@@ -33,7 +33,7 @@ namespace Kfone
         {
             if (!args.PrelaunchActivated)
             {
-                await ActivationService.ActivateAsync(args);
+                await ActivationService.ActivateAsync(args, false);
             }
         }
 
@@ -46,9 +46,9 @@ namespace Kfone
                 // Extracts the authorization response URI from the arguments.
                 ProtocolActivatedEventArgs protocolArgs = (ProtocolActivatedEventArgs)args;
                 Uri uri = protocolArgs.Uri;
-                SystemBrowser.ProcessResponse(uri);
+                WebView.ProcessResponse(uri);
             }
-            await ActivationService.ActivateAsync(args);
+            
         }
 
         private void OnAppUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
